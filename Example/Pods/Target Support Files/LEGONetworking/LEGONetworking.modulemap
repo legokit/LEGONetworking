@@ -1,0 +1,6 @@
+framework module LEGONetworking {
+  umbrella header "LEGONetworking-umbrella.h"
+
+  export *
+  module * { export * }
+}
