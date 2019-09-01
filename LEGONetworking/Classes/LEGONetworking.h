@@ -15,8 +15,6 @@ typedef void (^LEGOResponseSuccess) (LEGOResponse *response);
 typedef void (^LEGOResponseFailure) (LEGOResponse *response);
 
 typedef NS_ENUM(NSInteger,LEGORespondStatusCode) {
-    // 响应成功
-    LEGORespondStatusCodeSuccess = 1000,    // 请求成功
     // 响应失败
     LBRespondStatusCodeFailUnknown = 2000,    // 未知错误，请稍后重试
     LBRespondStatusCodeFailLoseConnection = 2001,    // 网络未连接
@@ -62,42 +60,42 @@ typedef void (^LEGOUploadProgress)(int64_t bytesWritten, int64_t totalBytesWritt
 
 /**
  开启或关闭控制台打印信息
-
+ 
  @param isDebug 默认是NO，debug环境建议打开
  */
 + (void)enableInterfaceDebug:(BOOL)isDebug;
 
 /**
  获取当前网络状态
-
+ 
  @return LEGONetworkStatus
  */
 + (LEGONetworkStatus)getCurrNetworkStatus;
 
 /**
  设置请求超时时间，默认为60秒
-
+ 
  @param timeout 超时时间
  */
 + (void)setTimeout:(NSTimeInterval)timeout;
 
 /**
  设置请求最大并发数，默认为3个，设置过多容易引发问题
-
+ 
  @param maxConnectOperationCount 请求最大并发数
  */
 + (void)setMaxConnectOperationCount:(NSUInteger)maxConnectOperationCount;
 
 /**
  配置公共的请求头，放在应用启动的时候配置就可以了
-
+ 
  @param httpHeaders 只需要将与服务器商定的固定参数设置即可
  */
 + (void)configCommonHttpHeaders:(NSDictionary *)httpHeaders;
 
 /**
  配置请求格式，默认为JSON。如果要求传递XML或者PLIST，请在全局配置一下
-
+ 
  @param requestType 请求格式，默认为json
  @param responseType 响应格式，默认为json，
  @param shouldAutoEncode 是否自动 encode url
@@ -108,7 +106,7 @@ typedef void (^LEGOUploadProgress)(int64_t bytesWritten, int64_t totalBytesWritt
 
 /**
  GET请求接口
-
+ 
  @param url 完整url
  @param params 参数，将自动拼接到get请求之后
  @param success 请求成功
@@ -116,19 +114,19 @@ typedef void (^LEGOUploadProgress)(int64_t bytesWritten, int64_t totalBytesWritt
  @return LEGOURLSessionTask
  */
 + (LEGOURLSessionTask *)getWithUrl:(NSString *)url
-                           params:(NSDictionary *)params
-                          success:(LEGOResponseSuccess)success
-                             fail:(LEGOResponseFailure)fail;
+                            params:(NSDictionary *)params
+                           success:(LEGOResponseSuccess)success
+                              fail:(LEGOResponseFailure)fail;
 
 + (LEGOURLSessionTask *)getWithUrl:(NSString *)url
-                           params:(NSDictionary *)params
-                         progress:(LEGODownloadProgress)progress
-                          success:(LEGOResponseSuccess)success
-                             fail:(LEGOResponseFailure)fail;
+                            params:(NSDictionary *)params
+                          progress:(LEGODownloadProgress)progress
+                           success:(LEGOResponseSuccess)success
+                              fail:(LEGOResponseFailure)fail;
 
 /**
  POST请求
-
+ 
  @param url 完整url
  @param params 接口中所需的参数
  @param success 请求成功
@@ -141,14 +139,14 @@ typedef void (^LEGOUploadProgress)(int64_t bytesWritten, int64_t totalBytesWritt
                                fail:(LEGOResponseFailure)fail;
 
 + (LEGOURLSessionTask *)postWithUrl:(NSString *)url
-                            params:(NSDictionary *)params
-                          progress:(LEGODownloadProgress)progress
-                           success:(LEGOResponseSuccess)success
-                              fail:(LEGOResponseFailure)fail;
+                             params:(NSDictionary *)params
+                           progress:(LEGODownloadProgress)progress
+                            success:(LEGOResponseSuccess)success
+                               fail:(LEGOResponseFailure)fail;
 
 /**
  文件上传
-
+ 
  @param url 上传路径
  @param uploadingFile 待上传文件的路径
  @param progress 上传进度
@@ -157,13 +155,13 @@ typedef void (^LEGOUploadProgress)(int64_t bytesWritten, int64_t totalBytesWritt
  @return LEGOURLSessionTask
  */
 + (LEGOURLSessionTask *)uploadFileWithUrl:(NSString *)url
-                           uploadingFile:(NSString *)uploadingFile
-                                progress:(LEGOUploadProgress)progress
-                                 success:(LEGOResponseSuccess)success
-                                    fail:(LEGOResponseFailure)fail;
+                            uploadingFile:(NSString *)uploadingFile
+                                 progress:(LEGOUploadProgress)progress
+                                  success:(LEGOResponseSuccess)success
+                                     fail:(LEGOResponseFailure)fail;
 /**
  下载文件
-
+ 
  @param url 下载URL
  @param saveToPath 下载到哪个路径
  @param progressBlock 下载进度
@@ -172,14 +170,14 @@ typedef void (^LEGOUploadProgress)(int64_t bytesWritten, int64_t totalBytesWritt
  @return LEGOURLSessionTask
  */
 + (LEGOURLSessionTask *)downloadWithUrl:(NSString *)url
-                            saveToPath:(NSString *)saveToPath
-                              progress:(LEGODownloadProgress)progressBlock
-                               success:(LEGOResponseSuccess)success
-                               failure:(LEGOResponseFailure)failure;
+                             saveToPath:(NSString *)saveToPath
+                               progress:(LEGODownloadProgress)progressBlock
+                                success:(LEGOResponseSuccess)success
+                                failure:(LEGOResponseFailure)failure;
 
 /**
  取消某个请求。如果是要取消某个请求，最好是引用接口所返回来的LEGOURLSessionTask对象，然后调用对象的cancel方法。如果不想引用对象，这里额外提供了一种方法来实现取消某个请求
-
+ 
  @param url NSString
  */
 + (void)cancelRequestWithURL:(NSString *)url;

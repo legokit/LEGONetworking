@@ -169,6 +169,7 @@ static NSDictionary *legoHttpHeaders = nil;
     [manager.requestSerializer setValue:
      @"App Store" forHTTPHeaderField:@"x-channel"];
     
+    
     for (NSString *key in legoHttpHeaders.allKeys) {
         if (legoHttpHeaders[key]) {
             [manager.requestSerializer setValue:legoHttpHeaders[key] forHTTPHeaderField:key];
@@ -181,9 +182,9 @@ static NSDictionary *legoHttpHeaders = nil;
 }
 
 + (LEGOURLSessionTask *)getWithUrl:(NSString *)url
-                           params:(NSDictionary *)params
-                          success:(LEGOResponseSuccess)success
-                             fail:(LEGOResponseFailure)fail {
+                            params:(NSDictionary *)params
+                           success:(LEGOResponseSuccess)success
+                              fail:(LEGOResponseFailure)fail {
     return [self getWithUrl:url
                      params:params
                    progress:nil
@@ -192,22 +193,22 @@ static NSDictionary *legoHttpHeaders = nil;
 }
 
 + (LEGOURLSessionTask *)getWithUrl:(NSString *)url
-                           params:(NSDictionary *)params
-                         progress:(LEGODownloadProgress)progress
-                          success:(LEGOResponseSuccess)success
-                             fail:(LEGOResponseFailure)fail {
+                            params:(NSDictionary *)params
+                          progress:(LEGODownloadProgress)progress
+                           success:(LEGOResponseSuccess)success
+                              fail:(LEGOResponseFailure)fail {
     return [self requestWithUrl:url
-                       httpMedth:1
-                          params:params
-                        progress:progress
-                         success:success
-                            fail:fail];
+                      httpMedth:1
+                         params:params
+                       progress:progress
+                        success:success
+                           fail:fail];
 }
 
 + (LEGOURLSessionTask *)postWithUrl:(NSString *)url
-                            params:(NSDictionary *)params
-                           success:(LEGOResponseSuccess)success
-                              fail:(LEGOResponseFailure)fail {
+                             params:(NSDictionary *)params
+                            success:(LEGOResponseSuccess)success
+                               fail:(LEGOResponseFailure)fail {
     return [self postWithUrl:url
                       params:params
                     progress:nil
@@ -216,16 +217,16 @@ static NSDictionary *legoHttpHeaders = nil;
 }
 
 + (LEGOURLSessionTask *)postWithUrl:(NSString *)url
-                            params:(NSDictionary *)params
-                          progress:(LEGODownloadProgress)progress
-                           success:(LEGOResponseSuccess)success
-                              fail:(LEGOResponseFailure)fail {
+                             params:(NSDictionary *)params
+                           progress:(LEGODownloadProgress)progress
+                            success:(LEGOResponseSuccess)success
+                               fail:(LEGOResponseFailure)fail {
     return [self requestWithUrl:url
-                       httpMedth:2
-                          params:params
-                        progress:progress
-                         success:success
-                            fail:fail];
+                      httpMedth:2
+                         params:params
+                       progress:progress
+                        success:success
+                           fail:fail];
 }
 
 + (LEGOURLSessionTask *)requestWithUrl:(NSString *)url
@@ -296,10 +297,10 @@ static NSDictionary *legoHttpHeaders = nil;
 
 #pragma mark - 上传与下载
 + (LEGOURLSessionTask *)uploadFileWithUrl:(NSString *)url
-                           uploadingFile:(NSString *)uploadingFile
-                                progress:(LEGOUploadProgress)progress
-                                 success:(LEGOResponseSuccess)success
-                                    fail:(LEGOResponseFailure)fail {
+                            uploadingFile:(NSString *)uploadingFile
+                                 progress:(LEGOUploadProgress)progress
+                                  success:(LEGOResponseSuccess)success
+                                     fail:(LEGOResponseFailure)fail {
     if (![NSURL URLWithString:uploadingFile]) {
         LEGONetWorkingLog(@"uploadingFile无效，无法生成URL。请检查待上传文件是否存在");
         return nil;
@@ -343,14 +344,14 @@ static NSDictionary *legoHttpHeaders = nil;
 }
 
 + (LEGOURLSessionTask *)uploadWithImage:(UIImage *)image
-                                   url:(NSString *)url
-                              filename:(NSString *)filename
-                                  name:(NSString *)name
-                              mimeType:(NSString *)mimeType
-                            parameters:(NSDictionary *)parameters
-                              progress:(LEGOUploadProgress)progress
-                               success:(LEGOResponseSuccess)success
-                                  fail:(LEGOResponseFailure)fail {
+                                    url:(NSString *)url
+                               filename:(NSString *)filename
+                                   name:(NSString *)name
+                               mimeType:(NSString *)mimeType
+                             parameters:(NSDictionary *)parameters
+                               progress:(LEGOUploadProgress)progress
+                                success:(LEGOResponseSuccess)success
+                                   fail:(LEGOResponseFailure)fail {
     if (![NSURL URLWithString:url]) {
         LEGONetWorkingLog(@"URLString无效，无法生成URL。可能是URL中有中文，请尝试Encode URL");
         return nil;
@@ -400,10 +401,10 @@ static NSDictionary *legoHttpHeaders = nil;
 }
 
 + (LEGOURLSessionTask *)downloadWithUrl:(NSString *)url
-                            saveToPath:(NSString *)saveToPath
-                              progress:(LEGODownloadProgress)progressBlock
-                               success:(LEGOResponseSuccess)success
-                               failure:(LEGOResponseFailure)failure {
+                             saveToPath:(NSString *)saveToPath
+                               progress:(LEGODownloadProgress)progressBlock
+                                success:(LEGOResponseSuccess)success
+                                failure:(LEGOResponseFailure)failure {
     if ([NSURL URLWithString:url] == nil) {
         LEGONetWorkingLog(@"URLString无效，无法生成URL。可能是URL中有中文，请尝试Encode URL");
         return nil;
@@ -421,8 +422,7 @@ static NSDictionary *legoHttpHeaders = nil;
         [[self allTasks] removeObject:session];
         if (error == nil) {
             if (success) {
-                NSDictionary *dic = @{@"code":@(LEGORespondStatusCodeSuccess)};
-                [self successResponse:dic success:success fail:failure];
+                [self successResponse:nil success:success fail:failure];
             }
             if ([self isDebug]) {
                 LEGONetWorkingLog(@"Download success for url %@", url);
@@ -469,34 +469,9 @@ static NSDictionary *legoHttpHeaders = nil;
     });
     id data = [self tryToParseData:responseData];
     LEGOResponse *response = [[LEGOResponse alloc] init];
-    if ([data isKindOfClass:[NSDictionary class]]) {
-        NSDictionary *dic = data;
-        if (LEGORespondStatusCodeSuccess == [dic[@"code"] integerValue]) {
-            response.data = dic[@"data"];
-            response.code = LEGORespondStatusCodeSuccess;
-            response.message = dic[@"message"];
-            if (success) {
-                success(response);
-            }
-        }
-        else {
-            if (LEGORespondStatusCodeNeedLogin == [dic[@"code"] integerValue]) {
-                response.data = dic[@"data"];
-                response.code = LEGORespondStatusCodeNeedLogin;
-                response.message = dic[@"message"];
-                if (fail) {
-                    fail(response);
-                }
-            }
-        }
-    }
-    else {
-        response.data = nil;
-        response.code = LBRespondStatusCodeUnReadable;
-        response.message = nil;
-        if (fail) {
-            fail(response);
-        }
+    response.data = data;
+    if (success) {
+        success(response);
     }
 }
 
