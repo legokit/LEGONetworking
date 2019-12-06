@@ -30,11 +30,8 @@ static NSDictionary *legoHttpHeaders = nil;
 
 @implementation LEGONetworking
 
-+ (void)load {
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        [self addObserverNetwork];
-    });
++ (void)startMonitorNetworkStatus {
+    [self addObserverNetwork];
 }
 
 #pragma mark -再次发起请求

@@ -54,6 +54,11 @@ typedef void (^LEGOUploadProgress)(int64_t bytesWritten, int64_t totalBytesWritt
 @interface LEGONetworking : NSObject
 
 /**
+ 开始监听网络事件
+ */
++ (void)startMonitorNetworkStatus;
+
+/**
  再次发起上次的请求，用于请求的接口需要登录，但是请求过后发现token已经过期等情况
  */
 + (void)goon;
