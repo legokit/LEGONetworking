@@ -7,8 +7,7 @@
 //
 
 #import "LEGONetworking.h"
-#import <AFNetworking/AFNetworking.h>
-#import <AFNetworking/AFNetworkActivityIndicatorManager.h>
+#import <AFNetworking/AFHTTPSessionManager.h>
 #import "NSString+LGMD5.h"
 
 #ifdef DEBUG
@@ -106,7 +105,6 @@ static NSDictionary *legoHttpHeaders = nil;
 + (AFHTTPSessionManager *)manager {
     @synchronized (self) {
         if (!legoHttpSessionManager) {
-            [AFNetworkActivityIndicatorManager sharedManager].enabled = YES;  // 开启转圈圈
             static AFHTTPSessionManager *manager;
             if (manager == nil) {
                 manager = [AFHTTPSessionManager manager];
