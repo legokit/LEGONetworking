@@ -1,9 +1,6 @@
 # LEGONetworking
 
-[![CI Status](https://img.shields.io/travis/564008993@qq.com/LEGONetworking.svg?style=flat)](https://travis-ci.org/564008993@qq.com/LEGONetworking)
-[![Version](https://img.shields.io/cocoapods/v/LEGONetworking.svg?style=flat)](https://cocoapods.org/pods/LEGONetworking)
-[![License](https://img.shields.io/cocoapods/l/LEGONetworking.svg?style=flat)](https://cocoapods.org/pods/LEGONetworking)
-[![Platform](https://img.shields.io/cocoapods/p/LEGONetworking.svg?style=flat)](https://cocoapods.org/pods/LEGONetworking)
+Network request tool, basic get and post request methods, including request progress, upload and download progress, monitoring network, setting network timeout and cancel request  网络请求工具，基础的 get、post 请求方法，包含请求进度，上传和下载的进度，监听网络、设置网络超时和取消请求
 
 ## Example
 
@@ -16,8 +13,51 @@ To run the example project, clone the repo, and run `pod install` from the Examp
 LEGONetworking is available through [CocoaPods](https://cocoapods.org). To install
 it, simply add the following line to your Podfile:
 
+```ruby
+source 'https://github.com/legokit/Specs.git'
+pod 'LEGONetworking'
+```
+
+**LEGONetworking** is the photo management tool, you can get album list, photo list, save photos, delete photos, get photos by iCloud, cancel photo request  照片管理工具，可以获取相册列表、照片列表，保存照片、删除照片，通过 iCloud 获取照片，取消照片请求
+
+- [Features](#features)
+- [Requirements](#requirements)
+- [Installation](#installation)
+- [Usage](#usage)
+- [License](#license)
+
+## Features
+
+- [x] Get and Post.
+- [x] Upload and Download. 
+- [x] request progress.  
+- [x] monitoring network.  
+- [x] Cancel request.  
+
+## Requirements
+
+- iOS 8.0+
+- Xcode 10.0+
+
+## Installation
+
+### CocoaPods
+
+[CocoaPods](https://cocoapods.org) is a dependency manager for Cocoa projects. For usage and installation instructions, visit their website. To integrate LEGOPhotosManager into your Xcode project using CocoaPods, specify it in your `Podfile`:
+
+```ruby
+source 'https://github.com/legokit/Specs.git'
+pod 'LEGONetworking'
+```
+
+### Manually
+
+If you prefer not to use any of the dependency mentioned above, you can integrate LEGOPhotosManager into your project manually. Just drag & drop the `Sources` folder to your project.
+
+
 ## Usage
 
+### Get and Post.
 ```
     // GET API
     NSString *url = @"http://api.map.baidu.com/telematics/v3/weather";
@@ -30,7 +70,7 @@ it, simply add the following line to your Podfile:
         
     }];
     
-    // GET API 请求进度
+    // GET API progress
     NSString *url = @"http://api.map.baidu.com/telematics/v3/weather";
     NSDictionary *dic = @{@"location":@"广州",
                           @"output":@"json",
@@ -54,7 +94,7 @@ it, simply add the following line to your Podfile:
 
     }];
     
-    // POST API 请求进度
+    // POST API progress
     NSString *url = @"http://data.zz.baidu.com/urls?site=www.henishuo.com&token=bRidefmXoNxIi3Jp";
     NSDictionary *dic = @{@"urls": @"http://www.henishuo.com/git-use-inwork/",
                           @"goal" : @"site",
@@ -90,7 +130,7 @@ it, simply add the following line to your Podfile:
 ```
 
 ## other
-
+### monitoring network.
 ```
     // 获取当前网络状态
     LEGONetworkStatus networkStatus = [LEGONetworking getCurrNetworkStatus];
