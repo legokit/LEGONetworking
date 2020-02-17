@@ -151,25 +151,7 @@ static NSDictionary *legoHttpHeaders = nil;
 
 + (void)setTokenAndHttps:(AFHTTPSessionManager *)manager {
     //设置登录用户token
-    [manager.requestSerializer setValue:[LEGOTokenManager sharedManager].token forHTTPHeaderField:@"x-token"];
-    //设置当前客户端类型
-    [manager.requestSerializer setValue:@"iOS" forHTTPHeaderField:@"x-client"];
-    //设置当前版本
-    [manager.requestSerializer setValue:[NSString stringWithString:[[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"]] forHTTPHeaderField:@"x-version"];
-    //设置网络类型
-    [manager.requestSerializer setValue:[@([self.class getCurrNetworkStatus]) stringValue] forHTTPHeaderField:@"x-nettype"];
-    //设置设备信息
-    [manager.requestSerializer setValue:[[[UIDevice currentDevice] identifierForVendor] UUIDString] forHTTPHeaderField:@"x-device"];
-    //设置渠道
-    [manager.requestSerializer setValue:
-     @"App Store" forHTTPHeaderField:@"x-channel"];
-    
-    
-    for (NSString *key in legoHttpHeaders.allKeys) {
-        if (legoHttpHeaders[key]) {
-            [manager.requestSerializer setValue:legoHttpHeaders[key] forHTTPHeaderField:key];
-        }
-    }
+    [manager.requestSerializer setValue:[LEGOTokenManager sharedManager].token forHTTPHeaderField:@"token"];
 }
 
 + (BOOL)shouldEncode {
@@ -478,25 +460,21 @@ static NSDictionary *legoHttpHeaders = nil;
     if ([error code] == NSURLErrorCancelled) {
         // 取消
         response.code = LBRespondStatusCodeFailCancel;
-        response.message = error.localizedDescription;
         response.error = error;
     }
     else if ([error code] == NSURLErrorTimedOut) {
         // 超时
         response.code = LBRespondStatusCodeFailTimedOut;
-        response.message = error.localizedDescription;
         response.error = error;
     }
     else if ([error code] == NSURLErrorNotConnectedToInternet) {
         // 丢失连接、网络为连接
         response.code = LBRespondStatusCodeFailLoseConnection;
-        response.message = error.localizedDescription;
         response.error = error;
     }
     else {
         // 未知错误，请稍后重试
         response.code = LBRespondStatusCodeFailUnknown;
-        response.message = error.localizedDescription;
         response.error = error;
     }
     if (fail) {

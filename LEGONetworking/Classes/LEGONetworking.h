@@ -198,6 +198,5 @@ typedef void (^LEGOUploadProgress)(int64_t bytesWritten, int64_t totalBytesWritt
 @interface LEGOResponse : NSObject
 @property (nonatomic, assign) LEGORespondStatusCode code;    // 服务器code码
 @property (nonatomic, strong) id data;    // 服务器数据
-@property (nonatomic, copy) NSString *message;    // 服务器抛错信息
 @property (nonatomic, strong) NSError *error;    // 系统 API 报错信息
 @end
