@@ -122,6 +122,7 @@ static NSDictionary *legoHttpHeaders = nil;
 + (void)setTokenAndHttps:(AFHTTPSessionManager *)manager {
     //设置登录用户token
     [manager.requestSerializer setValue:[LEGOTokenManager sharedManager].token forHTTPHeaderField:@"token"];
+    [manager.requestSerializer setValue:@"1" forHTTPHeaderField:@"platform"];
 }
 
 + (BOOL)shouldEncode {
