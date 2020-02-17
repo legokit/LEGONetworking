@@ -109,36 +109,6 @@ static NSDictionary *legoHttpHeaders = nil;
             if (manager == nil) {
                 manager = [AFHTTPSessionManager manager];
             }
-            switch (legoRequestType) {
-                case kLEGORequestTypeJSON: {
-                    manager.requestSerializer = [AFJSONRequestSerializer serializer];
-                    break;
-                }
-                case kLEGORequestTypePlainText: {
-                    manager.requestSerializer = [AFHTTPRequestSerializer serializer];
-                    break;
-                }
-                default: {
-                    break;
-                }
-            }
-            switch (legoResponseType) {
-                case kLEGOResponseTypeJSON: {
-                    manager.responseSerializer = [AFJSONResponseSerializer serializer];
-                    break;
-                }
-                case kLEGOResponseTypeXML: {
-                    manager.responseSerializer = [AFXMLParserResponseSerializer serializer];
-                    break;
-                }
-                case kLEGOResponseTypeData: {
-                    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
-                    break;
-                }
-                default: {
-                    break;
-                }
-            }
             manager.requestSerializer.stringEncoding = NSUTF8StringEncoding;
             manager.responseSerializer.acceptableContentTypes = [NSSet setWithArray:@[@"application/json",@"text/html",@"text/json",@"text/plain",@"text/javascript",@"text/xml",@"image/*"]];
             manager.requestSerializer.timeoutInterval = legoTimeout;
@@ -162,7 +132,7 @@ static NSDictionary *legoHttpHeaders = nil;
                             params:(NSDictionary *)params
                            success:(LEGOResponseSuccess)success
                               fail:(LEGOResponseFailure)fail {
-    return [self getWithUrl:url
+    return [self.class getWithUrl:url
                      params:params
                    progress:nil
                     success:success
@@ -174,9 +144,20 @@ static NSDictionary *legoHttpHeaders = nil;
                           progress:(LEGODownloadProgress)progress
                            success:(LEGOResponseSuccess)success
                               fail:(LEGOResponseFailure)fail {
-    return [self requestWithUrl:url
+    return [self.class getWithUrl:url params:params progress:progress responseType:kLEGOResponseTypeJSON success:success fail:fail];
+}
+
++ (LEGOURLSessionTask *)getWithUrl:(NSString *)url
+                            params:(NSDictionary *)params
+                          progress:(LEGODownloadProgress)progress
+                      responseType:(LEGOResponseType)responseType
+                           success:(LEGOResponseSuccess)success
+                              fail:(LEGOResponseFailure)fail {
+    return [self.class requestWithUrl:url
                       httpMedth:1
                          params:params
+                    requestType:kLEGORequestTypeJSON
+                   responseType:responseType
                        progress:progress
                         success:success
                            fail:fail];
@@ -186,7 +167,7 @@ static NSDictionary *legoHttpHeaders = nil;
                              params:(NSDictionary *)params
                             success:(LEGOResponseSuccess)success
                                fail:(LEGOResponseFailure)fail {
-    return [self postWithUrl:url
+    return [self.class postWithUrl:url
                       params:params
                     progress:nil
                      success:success
@@ -198,17 +179,30 @@ static NSDictionary *legoHttpHeaders = nil;
                            progress:(LEGODownloadProgress)progress
                             success:(LEGOResponseSuccess)success
                                fail:(LEGOResponseFailure)fail {
-    return [self requestWithUrl:url
-                      httpMedth:2
-                         params:params
-                       progress:progress
-                        success:success
-                           fail:fail];
+    return [self.class postWithUrl:url params:params progress:progress responseType:kLEGOResponseTypeJSON success:success fail:fail];
+}
+
++ (LEGOURLSessionTask *)postWithUrl:(NSString *)url
+                             params:(NSDictionary *)params
+                           progress:(LEGODownloadProgress)progress
+                       responseType:(LEGOResponseType)responseType
+                            success:(LEGOResponseSuccess)success
+                               fail:(LEGOResponseFailure)fail {
+    return [self.class requestWithUrl:url
+                            httpMedth:2
+                               params:params
+                          requestType:kLEGORequestTypeJSON
+                         responseType:responseType
+                             progress:progress
+                              success:success
+                                fail:fail];
 }
 
 + (LEGOURLSessionTask *)requestWithUrl:(NSString *)url
                              httpMedth:(NSUInteger)httpMethod
                                 params:(NSDictionary *)params
+                           requestType:(LEGORequestType)requestType
+                          responseType:(LEGOResponseType)responseType
                               progress:(LEGODownloadProgress)progress
                                success:(LEGOResponseSuccess)success
                                   fail:(LEGOResponseFailure)fail {
@@ -220,6 +214,36 @@ static NSDictionary *legoHttpHeaders = nil;
         return nil;
     }
     AFHTTPSessionManager *manager = [self manager];
+    switch (requestType) {
+        case kLEGORequestTypeJSON: {
+            manager.requestSerializer = [AFJSONRequestSerializer serializer];
+            break;
+        }
+        case kLEGORequestTypePlainText: {
+            manager.requestSerializer = [AFHTTPRequestSerializer serializer];
+            break;
+        }
+        default: {
+            break;
+        }
+    }
+    switch (responseType) {
+           case kLEGOResponseTypeJSON: {
+               manager.responseSerializer = [AFJSONResponseSerializer serializer];
+               break;
+           }
+           case kLEGOResponseTypeXML: {
+               manager.responseSerializer = [AFXMLParserResponseSerializer serializer];
+               break;
+           }
+           case kLEGOResponseTypeData: {
+               manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+               break;
+           }
+           default: {
+               break;
+           }
+    }
     [self setTokenAndHttps:manager];
     LEGOURLSessionTask *session = nil;
     dispatch_async(dispatch_get_main_queue(), ^{

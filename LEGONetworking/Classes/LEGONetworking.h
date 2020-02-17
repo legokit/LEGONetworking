@@ -129,6 +129,13 @@ typedef void (^LEGOUploadProgress)(int64_t bytesWritten, int64_t totalBytesWritt
                            success:(LEGOResponseSuccess)success
                               fail:(LEGOResponseFailure)fail;
 
++ (LEGOURLSessionTask *)getWithUrl:(NSString *)url
+                            params:(NSDictionary *)params
+                          progress:(LEGODownloadProgress)progress
+                      responseType:(LEGOResponseType)responseType
+                           success:(LEGOResponseSuccess)success
+                              fail:(LEGOResponseFailure)fail;
+
 /**
  POST请求
  
@@ -146,6 +153,13 @@ typedef void (^LEGOUploadProgress)(int64_t bytesWritten, int64_t totalBytesWritt
 + (LEGOURLSessionTask *)postWithUrl:(NSString *)url
                              params:(NSDictionary *)params
                            progress:(LEGODownloadProgress)progress
+                            success:(LEGOResponseSuccess)success
+                               fail:(LEGOResponseFailure)fail;
+
++ (LEGOURLSessionTask *)postWithUrl:(NSString *)url
+                             params:(NSDictionary *)params
+                           progress:(LEGODownloadProgress)progress
+                       responseType:(LEGOResponseType)responseType
                             success:(LEGOResponseSuccess)success
                                fail:(LEGOResponseFailure)fail;
 
