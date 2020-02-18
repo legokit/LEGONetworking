@@ -38,4 +38,10 @@ NSString *const kUserDefaultsKeyTokenManagerToken = @"kUserDefaultsKeyTokenManag
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
++ (void)clearToken {
+    [LEGOTokenManager sharedManager].token = nil;
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:kUserDefaultsKeyTokenManagerToken];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
 @end

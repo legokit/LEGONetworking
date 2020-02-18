@@ -17,6 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (void)saveToken:(NSString *)token;
 
++ (void)clearToken;
 @end
 
 NS_ASSUME_NONNULL_END
