@@ -164,37 +164,6 @@ typedef void (^LEGOUploadProgress)(int64_t bytesWritten, int64_t totalBytesWritt
                                fail:(LEGOResponseFailure)fail;
 
 /**
- 文件上传
- 
- @param url 上传路径
- @param uploadingFile 待上传文件的路径
- @param progress 上传进度
- @param success 上传成功
- @param fail 上传失败
- @return LEGOURLSessionTask
- */
-+ (LEGOURLSessionTask *)uploadFileWithUrl:(NSString *)url
-                            uploadingFile:(NSString *)uploadingFile
-                                 progress:(LEGOUploadProgress)progress
-                                  success:(LEGOResponseSuccess)success
-                                     fail:(LEGOResponseFailure)fail;
-/**
- 下载文件
- 
- @param url 下载URL
- @param saveToPath 下载到哪个路径
- @param progressBlock 下载进度
- @param success 下载成功
- @param failure 下载失败
- @return LEGOURLSessionTask
- */
-+ (LEGOURLSessionTask *)downloadWithUrl:(NSString *)url
-                             saveToPath:(NSString *)saveToPath
-                               progress:(LEGODownloadProgress)progressBlock
-                                success:(LEGOResponseSuccess)success
-                                failure:(LEGOResponseFailure)failure;
-
-/**
  取消某个请求。如果是要取消某个请求，最好是引用接口所返回来的LEGOURLSessionTask对象，然后调用对象的cancel方法。如果不想引用对象，这里额外提供了一种方法来实现取消某个请求
  
  @param url NSString
@@ -210,7 +179,8 @@ typedef void (^LEGOUploadProgress)(int64_t bytesWritten, int64_t totalBytesWritt
 @end
 
 @interface LEGOResponse : NSObject
-@property (nonatomic, assign) LEGORespondStatusCode code;    // 服务器code码
-@property (nonatomic, strong) id data;    // 服务器数据
-@property (nonatomic, strong) NSError *error;    // 系统 API 报错信息
+@property (nonatomic, assign) LEGORespondStatusCode code;
+@property (nonatomic, strong) id data;
+@property (nonatomic, strong) NSString *message;
+@property (nonatomic, strong) NSError *error;
 @end

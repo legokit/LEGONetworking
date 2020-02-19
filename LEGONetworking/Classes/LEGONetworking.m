@@ -123,6 +123,7 @@ static NSDictionary *legoHttpHeaders = nil;
     //设置登录用户token
     [manager.requestSerializer setValue:[LEGOTokenManager sharedManager].token forHTTPHeaderField:@"token"];
     [manager.requestSerializer setValue:@"1" forHTTPHeaderField:@"platform"];
+
 }
 
 + (BOOL)shouldEncode {
@@ -246,6 +247,7 @@ static NSDictionary *legoHttpHeaders = nil;
            }
     }
     [self setTokenAndHttps:manager];
+
     LEGOURLSessionTask *session = nil;
     dispatch_async(dispatch_get_main_queue(), ^{
         [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
@@ -261,13 +263,14 @@ static NSDictionary *legoHttpHeaders = nil;
             if ([self isDebug]) {
                 [self logWithSuccessResponse:responseObject
                                          url:url
-                                      params:params];
+                                      params:params
+                                  httpMethod:httpMethod];
             }
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
             [[self allTasks] removeObject:task];
             [self handleCallbackWithError:error fail:fail];
             if ([self isDebug]) {
-                [self logWithFailError:error url:url params:params];
+                [self logWithFailError:error url:url params:params httpMethod:httpMethod];
             }
         }];
     } else if (2 == httpMethod) {
@@ -281,13 +284,14 @@ static NSDictionary *legoHttpHeaders = nil;
             if ([self isDebug]) {
                 [self logWithSuccessResponse:responseObject
                                          url:url
-                                      params:params];
+                                      params:params
+                                  httpMethod:httpMethod];
             }
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
             [[self allTasks] removeObject:task];
             [self handleCallbackWithError:error fail:fail];
             if ([self isDebug]) {
-                [self logWithFailError:error url:url params:params];
+                [self logWithFailError:error url:url params:params httpMethod:httpMethod];
             }
         }];
     }
@@ -296,153 +300,6 @@ static NSDictionary *legoHttpHeaders = nil;
     }
     return session;
 }
-
-#pragma mark - 上传与下载
-+ (LEGOURLSessionTask *)uploadFileWithUrl:(NSString *)url
-                            uploadingFile:(NSString *)uploadingFile
-                                 progress:(LEGOUploadProgress)progress
-                                  success:(LEGOResponseSuccess)success
-                                     fail:(LEGOResponseFailure)fail {
-    if (![NSURL URLWithString:uploadingFile]) {
-        LEGONetWorkingLog(@"uploadingFile无效，无法生成URL。请检查待上传文件是否存在");
-        return nil;
-    }
-    
-    NSURL *uploadURL = [NSURL URLWithString:url];
-    if (!uploadURL) {
-        LEGONetWorkingLog(@"URLString无效，无法生成URL。可能是URL中有中文或特殊字符，请尝试Encode URL");
-        return nil;
-    }
-    AFHTTPSessionManager *manager = [self manager];
-    NSURLRequest *request = [NSURLRequest requestWithURL:uploadURL];
-    LEGOURLSessionTask *session = nil;
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
-    });
-    [manager uploadTaskWithRequest:request fromFile:[NSURL URLWithString:uploadingFile] progress:^(NSProgress * _Nonnull uploadProgress) {
-        if (progress) {
-            progress(uploadProgress.completedUnitCount, uploadProgress.totalUnitCount);
-        }
-    } completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
-        [[self allTasks] removeObject:session];
-        [self successResponse:responseObject success:success fail:fail];
-        if (error) {
-            [self handleCallbackWithError:error fail:fail];
-            if ([self isDebug]) {
-                [self logWithFailError:error url:response.URL.absoluteString params:nil];
-            }
-        } else {
-            if ([self isDebug]) {
-                [self logWithSuccessResponse:responseObject
-                                         url:response.URL.absoluteString
-                                      params:nil];
-            }
-        }
-    }];
-    if (session) {
-        [[self allTasks] addObject:session];
-    }
-    return session;
-}
-
-+ (LEGOURLSessionTask *)uploadWithImage:(UIImage *)image
-                                    url:(NSString *)url
-                               filename:(NSString *)filename
-                                   name:(NSString *)name
-                               mimeType:(NSString *)mimeType
-                             parameters:(NSDictionary *)parameters
-                               progress:(LEGOUploadProgress)progress
-                                success:(LEGOResponseSuccess)success
-                                   fail:(LEGOResponseFailure)fail {
-    if (![NSURL URLWithString:url]) {
-        LEGONetWorkingLog(@"URLString无效，无法生成URL。可能是URL中有中文，请尝试Encode URL");
-        return nil;
-    }
-    if ([self shouldEncode]) {
-        url = [self encodeUrl:url];
-    }
-    AFHTTPSessionManager *manager = [self manager];
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
-    });
-    LEGOURLSessionTask *session = [manager POST:url parameters:parameters constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
-        NSData *imageData = UIImageJPEGRepresentation(image, 1);
-        NSString *imageFileName = filename;
-        if (filename == nil || ![filename isKindOfClass:[NSString class]] || filename.length == 0) {
-            NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-            formatter.dateFormat = @"yyyyMMddHHmmss";
-            NSString *str = [formatter stringFromDate:[NSDate date]];
-            imageFileName = [NSString stringWithFormat:@"%@.jpg", str];
-        }
-        // 上传图片，以文件流的格式
-        [formData appendPartWithFileData:imageData name:name fileName:imageFileName mimeType:mimeType];
-    } progress:^(NSProgress * _Nonnull uploadProgress) {
-        if (progress) {
-            progress(uploadProgress.completedUnitCount, uploadProgress.totalUnitCount);
-        }
-    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        [[self allTasks] removeObject:task];
-        [self successResponse:responseObject success:success fail:fail];
-        if ([self isDebug]) {
-            [self logWithSuccessResponse:responseObject
-                                     url:url
-                                  params:parameters];
-        }
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        [[self allTasks] removeObject:task];
-        [self handleCallbackWithError:error fail:fail];
-        if ([self isDebug]) {
-            [self logWithFailError:error url:url params:nil];
-        }
-    }];
-    [session resume];
-    if (session) {
-        [[self allTasks] addObject:session];
-    }
-    return session;
-}
-
-+ (LEGOURLSessionTask *)downloadWithUrl:(NSString *)url
-                             saveToPath:(NSString *)saveToPath
-                               progress:(LEGODownloadProgress)progressBlock
-                                success:(LEGOResponseSuccess)success
-                                failure:(LEGOResponseFailure)failure {
-    if ([NSURL URLWithString:url] == nil) {
-        LEGONetWorkingLog(@"URLString无效，无法生成URL。可能是URL中有中文，请尝试Encode URL");
-        return nil;
-    }
-    NSURLRequest *downloadRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:url]];
-    AFHTTPSessionManager *manager = [self manager];
-    LEGOURLSessionTask *session = nil;
-    session = [manager downloadTaskWithRequest:downloadRequest progress:^(NSProgress * _Nonnull downloadProgress) {
-        if (progressBlock) {
-            progressBlock(downloadProgress.completedUnitCount, downloadProgress.totalUnitCount);
-        }
-    } destination:^NSURL * _Nonnull(NSURL * _Nonnull targetPath, NSURLResponse * _Nonnull response) {
-        return [NSURL fileURLWithPath:saveToPath];
-    } completionHandler:^(NSURLResponse * _Nonnull response, NSURL * _Nullable filePath, NSError * _Nullable error) {
-        [[self allTasks] removeObject:session];
-        if (error == nil) {
-            if (success) {
-                [self successResponse:nil success:success fail:failure];
-            }
-            if ([self isDebug]) {
-                LEGONetWorkingLog(@"Download success for url %@", url);
-            }
-        } else {
-            [self handleCallbackWithError:error fail:failure];
-            if ([self isDebug]) {
-                LEGONetWorkingLog(@"Download fail for url %@, reason : %@",url,[error description]);
-            }
-        }
-    }];
-    [session resume];
-    if (session) {
-        [[self allTasks] addObject:session];
-    }
-    return session;
-}
-
 
 + (NSString *)encodeUrl:(NSString *)url {
     return [self LEGO_URLEncode:url];
@@ -478,6 +335,7 @@ static NSDictionary *legoHttpHeaders = nil;
 }
 
 + (void)handleCallbackWithError:(NSError *)error fail:(LEGOResponseFailure)fail {
+    NSString *message = [[NSString alloc] initWithData:(NSData *)error.userInfo[AFNetworkingOperationFailingURLResponseDataErrorKey] encoding:NSUTF8StringEncoding];
     dispatch_async(dispatch_get_main_queue(), ^{
         [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
     });
@@ -501,6 +359,12 @@ static NSDictionary *legoHttpHeaders = nil;
         // 未知错误，请稍后重试
         response.code = LBRespondStatusCodeFailUnknown;
         response.error = error;
+    }
+    if ([message isKindOfClass:[NSString class]]) {
+        response.message = message;
+        if ([message isEqualToString:@"device-offline"]) {
+            [LEGOTokenManager clearToken];
+        }
     }
     if (fail) {
         fail(response);
@@ -540,20 +404,23 @@ static NSDictionary *legoHttpHeaders = nil;
 }
 
 #pragma mark - log 信息
-+ (void)logWithSuccessResponse:(id)response url:(NSString *)url params:(NSDictionary *)params {
-    LEGONetWorkingLog(@"\nrequest success, \nURL: %@\n params:%@\n response:%@\n\n",[self generateGETAbsoluteURL:url params:params],params,[self tryToParseData:response]);
++ (void)logWithSuccessResponse:(id)response url:(NSString *)url params:(NSDictionary *)params httpMethod:(NSInteger)httpMethod  {
+    NSString *requestType = httpMethod == 1 ? @"get" : @"post";
+    LEGONetWorkingLog(@"\nrequest success, \nURL:%@ \n%@ \n params:%@\n response:%@\ntoken=%@",[self generateGETAbsoluteURL:url params:params],requestType,params,[self tryToParseData:response],[LEGOTokenManager sharedManager].token);
 }
 
-+ (void)logWithFailError:(NSError *)error url:(NSString *)url params:(id)params {
++ (void)logWithFailError:(NSError *)error url:(NSString *)url params:(id)params httpMethod:(NSInteger)httpMethod {
+    NSString *message = [[NSString alloc] initWithData:(NSData *)error.userInfo[AFNetworkingOperationFailingURLResponseDataErrorKey] encoding:NSUTF8StringEncoding];
+    NSString *requestType = httpMethod == 1 ? @"get" : @"post";
     NSString *format = @" params: ";
     if (params == nil || ![params isKindOfClass:[NSDictionary class]]) {
         format = @"";
         params = @"";
     }
     if ([error code] == NSURLErrorCancelled) {
-        LEGONetWorkingLog(@"\nrequest was canceled mannully, \nURL: %@ %@%@\n\n",[self generateGETAbsoluteURL:url params:params],format,params);
+        LEGONetWorkingLog(@"\nrequest was canceled mannully, \nURL: %@ \n%@\n %@%@\ntoken:%@\nmessage:%@\n",[self generateGETAbsoluteURL:url params:params],requestType,format,params,[LEGOTokenManager sharedManager].token,message);
     } else {
-        LEGONetWorkingLog(@"\nrequest error, \nURL: %@ %@%@\n errorInfos:%@\n\n",[self generateGETAbsoluteURL:url params:params],format,params,[error localizedDescription]);
+        LEGONetWorkingLog(@"\nrequest error, \nURL: %@ \n%@\n %@%@\n errorInfos:%@\ntoken:%@\nmessager:%@\n",[self generateGETAbsoluteURL:url params:params],requestType,format,params,[error localizedDescription],[LEGOTokenManager sharedManager].token,message);
     }
 }
 
