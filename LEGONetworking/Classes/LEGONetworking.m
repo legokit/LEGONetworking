@@ -16,6 +16,8 @@
 #define LEGONetWorkingLog(s, ... )
 #endif
 
+NSString *const kNoficationKeyLoginInvalid = @"kNoficationKeyLoginInvalid";  //登录失效
+
 static LEGONetworkStatus leogNetworkStatus = kLEGONetworkStatusUnknown;
 static LEGOResponseType legoResponseType = kLEGOResponseTypeJSON;
 static LEGORequestType  legoRequestType  = kLEGORequestTypeJSON;
@@ -123,7 +125,7 @@ static NSDictionary *legoHttpHeaders = nil;
     //设置登录用户token
     [manager.requestSerializer setValue:[LEGOTokenManager sharedManager].token forHTTPHeaderField:@"token"];
     [manager.requestSerializer setValue:@"1" forHTTPHeaderField:@"platform"];
-
+    [manager.requestSerializer setValue:[UIDevice currentDevice].identifierForVendor.UUIDString forHTTPHeaderField:@"device"];
 }
 
 + (BOOL)shouldEncode {
@@ -364,6 +366,7 @@ static NSDictionary *legoHttpHeaders = nil;
         response.message = message;
         if ([message isEqualToString:@"device-offline"]) {
             [LEGOTokenManager clearToken];
+            [[NSNotificationCenter defaultCenter] postNotificationName:kNoficationKeyLoginInvalid object:nil];
         }
     }
     if (fail) {
