@@ -17,6 +17,7 @@
 #endif
 
 NSString *const kNoficationKeyLoginInvalid = @"kNoficationKeyLoginInvalid";  //登录失效
+NSString *const kNoficationKeyLoginError = @"kNoficationKeyLoginError";  //登录异常
 
 static LEGONetworkStatus leogNetworkStatus = kLEGONetworkStatusUnknown;
 static LEGOResponseType legoResponseType = kLEGOResponseTypeJSON;
@@ -260,7 +261,7 @@ static NSDictionary *legoHttpHeaders = nil;
                 progress(downloadProgress.completedUnitCount, downloadProgress.totalUnitCount);
             }
         } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-            [self successResponse:responseObject success:success fail:fail];
+            [self successResponse:responseObject task:task success:success fail:fail];
             [[self allTasks] removeObject:task];
             if ([self isDebug]) {
                 [self logWithSuccessResponse:responseObject
@@ -270,7 +271,7 @@ static NSDictionary *legoHttpHeaders = nil;
             }
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
             [[self allTasks] removeObject:task];
-            [self handleCallbackWithError:error fail:fail];
+            [self handleCallbackWithError:error task:task fail:fail];
             if ([self isDebug]) {
                 [self logWithFailError:error url:url params:params httpMethod:httpMethod];
             }
@@ -281,7 +282,7 @@ static NSDictionary *legoHttpHeaders = nil;
                 progress(downloadProgress.completedUnitCount, downloadProgress.totalUnitCount);
             }
         } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-            [self successResponse:responseObject success:success fail:fail];
+            [self successResponse:responseObject task:task success:success fail:fail];
             [[self allTasks] removeObject:task];
             if ([self isDebug]) {
                 [self logWithSuccessResponse:responseObject
@@ -291,7 +292,7 @@ static NSDictionary *legoHttpHeaders = nil;
             }
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
             [[self allTasks] removeObject:task];
-            [self handleCallbackWithError:error fail:fail];
+            [self handleCallbackWithError:error task:task fail:fail];
             if ([self isDebug]) {
                 [self logWithFailError:error url:url params:params httpMethod:httpMethod];
             }
@@ -324,24 +325,27 @@ static NSDictionary *legoHttpHeaders = nil;
 }
 
 #pragma mark - 请求回调成功、失败
-+ (void)successResponse:(id)responseData success:(LEGOResponseSuccess)success fail:(LEGOResponseFailure)fail {
++ (void)successResponse:(id)responseData task:(NSURLSessionDataTask *)task success:(LEGOResponseSuccess)success fail:(LEGOResponseFailure)fail {
     dispatch_async(dispatch_get_main_queue(), ^{
         [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
     });
     id data = [self tryToParseData:responseData];
     LEGOResponse *response = [[LEGOResponse alloc] init];
     response.data = data;
+    response.task = task;
+    
     if (success) {
         success(response);
     }
 }
 
-+ (void)handleCallbackWithError:(NSError *)error fail:(LEGOResponseFailure)fail {
++ (void)handleCallbackWithError:(NSError *)error task:(NSURLSessionDataTask *)task fail:(LEGOResponseFailure)fail {
     NSString *message = [[NSString alloc] initWithData:(NSData *)error.userInfo[AFNetworkingOperationFailingURLResponseDataErrorKey] encoding:NSUTF8StringEncoding];
     dispatch_async(dispatch_get_main_queue(), ^{
         [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
     });
     LEGOResponse *response = [[LEGOResponse alloc] init];
+    response.task = task;
     if ([error code] == NSURLErrorCancelled) {
         // 取消
         response.code = LBRespondStatusCodeFailCancel;
@@ -362,15 +366,20 @@ static NSDictionary *legoHttpHeaders = nil;
         response.code = LBRespondStatusCodeFailUnknown;
         response.error = error;
     }
-    if ([message isKindOfClass:[NSString class]]) {
-        response.message = message;
-        if ([message isEqualToString:@"device-offline"]) {
-            [LEGOTokenManager clearToken];
-            [[NSNotificationCenter defaultCenter] postNotificationName:kNoficationKeyLoginInvalid object:nil];
-        }
+    NSURLResponse *urlResponse = task.response;
+    NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)urlResponse;
+    if (httpResponse.statusCode == 401) {
+        [LEGOTokenManager clearToken];
+        [[NSNotificationCenter defaultCenter] postNotificationName:kNoficationKeyLoginInvalid object:nil];
     }
-    if (fail) {
-        fail(response);
+    else if (httpResponse.statusCode == 400) {
+        [LEGOTokenManager clearToken];
+        [[NSNotificationCenter defaultCenter] postNotificationName:kNoficationKeyLoginError object:nil];
+    }
+    else {
+        if (fail) {
+            fail(response);
+        }
     }
 }
 

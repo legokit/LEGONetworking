@@ -11,6 +11,7 @@
 @class LEGOResponse;
 
 UIKIT_EXTERN NSString *const kNoficationKeyLoginInvalid;    //登录失效
+UIKIT_EXTERN NSString *const kNoficationKeyLoginError;    //登录异常
 
 typedef NSURLSessionTask LEGOURLSessionTask;
 typedef void (^LEGOResponseSuccess) (LEGOResponse *response);
@@ -185,4 +186,6 @@ typedef void (^LEGOUploadProgress)(int64_t bytesWritten, int64_t totalBytesWritt
 @property (nonatomic, strong) id data;
 @property (nonatomic, strong) NSString *message;
 @property (nonatomic, strong) NSError *error;
+@property (nonatomic, strong) NSURLSessionDataTask *task;
+
 @end
