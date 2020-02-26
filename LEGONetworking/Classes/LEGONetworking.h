@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "LEGOTokenManager.h"
-@class LEGOResponse;
+@class LEGOResponse,LEGOUploadData;
 
 UIKIT_EXTERN NSString *const kNoficationKeyLoginInvalid;    //登录失效
 UIKIT_EXTERN NSString *const kNoficationKeyLoginError;    //登录异常
@@ -166,6 +166,24 @@ typedef void (^LEGOUploadProgress)(int64_t bytesWritten, int64_t totalBytesWritt
                             success:(LEGOResponseSuccess)success
                                fail:(LEGOResponseFailure)fail;
 
+
+
+/// data 上传
+/// @param dataArray LEGOUploadData array
+/// @param params NSDictionary
+/// @param httpMethod @"get" / @"post"
+/// @param progress NSProgress
+/// @param responseType LEGOResponseType
+
++ (LEGOURLSessionTask *)uploadWithUrl:(NSString *)url
+                            dataArray:(NSArray <LEGOUploadData *> *)dataArray
+                               params:(NSDictionary *)params
+                           httpMethod:(NSString *)httpMethod
+                             progress:(void (^)(NSProgress *uploadProgress))progress
+                         responseType:(LEGOResponseType)responseType
+                              success:(LEGOResponseSuccess)success
+                                 fail:(LEGOResponseFailure)fail;
+
 /**
  取消某个请求。如果是要取消某个请求，最好是引用接口所返回来的LEGOURLSessionTask对象，然后调用对象的cancel方法。如果不想引用对象，这里额外提供了一种方法来实现取消某个请求
  
@@ -187,5 +205,14 @@ typedef void (^LEGOUploadProgress)(int64_t bytesWritten, int64_t totalBytesWritt
 @property (nonatomic, strong) NSString *message;
 @property (nonatomic, strong) NSError *error;
 @property (nonatomic, strong) NSURLSessionDataTask *task;
+
+@end
+
+
+@interface LEGOUploadData : NSObject
+@property (nonatomic, strong) NSData *data;
+@property (nonatomic, copy) NSString *name;
+@property (nonatomic, copy) NSString *fileName;
+@property (nonatomic, copy) NSString *mimeType;
 
 @end

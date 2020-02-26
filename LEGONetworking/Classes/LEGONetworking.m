@@ -304,6 +304,64 @@ static NSDictionary *legoHttpHeaders = nil;
     return session;
 }
 
+/// data 上传
+/// @param dataArray LEGOUploadData array
+/// @param params NSDictionary
+/// @param httpMethod @"get" / @"post"
+/// @param progress NSProgress
+/// @param responseType LEGOResponseType
+
++ (LEGOURLSessionTask *)uploadWithUrl:(NSString *)url
+                            dataArray:(NSArray <LEGOUploadData *> *)dataArray
+                               params:(NSDictionary *)params
+                           httpMethod:(NSString *)httpMethod
+                             progress:(void (^)(NSProgress *uploadProgress))progress
+                         responseType:(LEGOResponseType)responseType
+                              success:(LEGOResponseSuccess)success
+                                 fail:(LEGOResponseFailure)fail;
+{
+    AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
+    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    NSMutableURLRequest *request = [[AFHTTPRequestSerializer serializer] multipartFormRequestWithMethod:httpMethod URLString:url parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+        if (dataArray && dataArray.count) {
+            [dataArray enumerateObjectsUsingBlock:^(LEGOUploadData * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                [formData appendPartWithFileData:obj.data name:obj.name fileName:obj.fileName mimeType:obj.mimeType];
+            }];
+        }
+    } error:nil];
+    [request setValue:[LEGOTokenManager sharedManager].token forHTTPHeaderField:@"token"];
+    [request setValue:@"1" forHTTPHeaderField:@"platform"];
+    [request setValue:[UIDevice currentDevice].identifierForVendor.UUIDString forHTTPHeaderField:@"device"];
+    __block NSURLSessionUploadTask *task = [manager uploadTaskWithStreamedRequest:request progress:progress completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if (!error) {
+                [self.class successResponse:responseObject task:task success:success fail:fail];
+                [[self allTasks] removeObject:task];
+                if ([self isDebug]) {
+                    NSInteger httpMethodInt = [httpMethod isEqualToString:@"get"] ? 1 : 2;
+                    [self logWithSuccessResponse:responseObject
+                                             url:url
+                                          params:params
+                                      httpMethod:httpMethodInt];
+                }
+            }
+            else {
+                [[self allTasks] removeObject:task];
+                [self handleCallbackWithError:error task:task fail:fail];
+                if ([self isDebug]) {
+                    NSInteger httpMethodInt = [httpMethod isEqualToString:@"get"] ? 1 : 2;
+                    [self logWithFailError:error url:url params:params httpMethod:httpMethodInt];
+                }
+            }
+        });
+    }];
+    [task resume];
+    if (task) {
+        [[self allTasks] addObject:task];
+    }
+    return task;
+}
+
 + (NSString *)encodeUrl:(NSString *)url {
     return [self LEGO_URLEncode:url];
 }
@@ -346,6 +404,7 @@ static NSDictionary *legoHttpHeaders = nil;
     });
     LEGOResponse *response = [[LEGOResponse alloc] init];
     response.task = task;
+    response.message = message;
     if ([error code] == NSURLErrorCancelled) {
         // 取消
         response.code = LBRespondStatusCodeFailCancel;
@@ -418,7 +477,7 @@ static NSDictionary *legoHttpHeaders = nil;
 #pragma mark - log 信息
 + (void)logWithSuccessResponse:(id)response url:(NSString *)url params:(NSDictionary *)params httpMethod:(NSInteger)httpMethod  {
     NSString *requestType = httpMethod == 1 ? @"get" : @"post";
-    LEGONetWorkingLog(@"\nrequest success, \nURL:%@ \n%@ \n params:%@\n response:%@\ntoken=%@",[self generateGETAbsoluteURL:url params:params],requestType,params,[self tryToParseData:response],[LEGOTokenManager sharedManager].token);
+    LEGONetWorkingLog(@"\nrequest success, \nURL:%@ \n%@ \n params:%@\n response:%@\ntoken=%@\ndevice=%@",[self generateGETAbsoluteURL:url params:params],requestType,params,[self tryToParseData:response],[LEGOTokenManager sharedManager].token,[UIDevice currentDevice].identifierForVendor.UUIDString);
 }
 
 + (void)logWithFailError:(NSError *)error url:(NSString *)url params:(id)params httpMethod:(NSInteger)httpMethod {
@@ -430,9 +489,9 @@ static NSDictionary *legoHttpHeaders = nil;
         params = @"";
     }
     if ([error code] == NSURLErrorCancelled) {
-        LEGONetWorkingLog(@"\nrequest was canceled mannully, \nURL: %@ \n%@\n %@%@\ntoken:%@\nmessage:%@\n",[self generateGETAbsoluteURL:url params:params],requestType,format,params,[LEGOTokenManager sharedManager].token,message);
+        LEGONetWorkingLog(@"\nrequest was canceled mannully, \nURL: %@ \n%@\n %@%@\ntoken:%@\nmessage:%@\ndevice=%@",[self generateGETAbsoluteURL:url params:params],requestType,format,params,[LEGOTokenManager sharedManager].token,message,[UIDevice currentDevice].identifierForVendor.UUIDString);
     } else {
-        LEGONetWorkingLog(@"\nrequest error, \nURL: %@ \n%@\n %@%@\n errorInfos:%@\ntoken:%@\nmessager:%@\n",[self generateGETAbsoluteURL:url params:params],requestType,format,params,[error localizedDescription],[LEGOTokenManager sharedManager].token,message);
+        LEGONetWorkingLog(@"\nrequest error, \nURL: %@ \n%@\n %@%@\n errorInfos:%@\ntoken:%@\nmessager:%@\ndevice=%@",[self generateGETAbsoluteURL:url params:params],requestType,format,params,[error localizedDescription],[LEGOTokenManager sharedManager].token,message,[UIDevice currentDevice].identifierForVendor.UUIDString);
     }
 }
 
@@ -475,6 +534,10 @@ static NSDictionary *legoHttpHeaders = nil;
 
 
 @implementation LEGOResponse
+
+@end
+
+@implementation LEGOUploadData
 
 @end
 
