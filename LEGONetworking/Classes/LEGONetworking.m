@@ -321,7 +321,23 @@ static NSDictionary *legoHttpHeaders = nil;
                                  fail:(LEGOResponseFailure)fail;
 {
     AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
-    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    switch (responseType) {
+           case kLEGOResponseTypeJSON: {
+               manager.responseSerializer = [AFJSONResponseSerializer serializer];
+               break;
+           }
+           case kLEGOResponseTypeXML: {
+               manager.responseSerializer = [AFXMLParserResponseSerializer serializer];
+               break;
+           }
+           case kLEGOResponseTypeData: {
+               manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+               break;
+           }
+           default: {
+               break;
+           }
+    }
     NSMutableURLRequest *request = [[AFHTTPRequestSerializer serializer] multipartFormRequestWithMethod:httpMethod URLString:url parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
         if (dataArray && dataArray.count) {
             [dataArray enumerateObjectsUsingBlock:^(LEGOUploadData * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
