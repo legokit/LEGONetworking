@@ -493,7 +493,7 @@ static NSDictionary *legoHttpHeaders = nil;
 #pragma mark - log 信息
 + (void)logWithSuccessResponse:(id)response url:(NSString *)url params:(NSDictionary *)params httpMethod:(NSInteger)httpMethod  {
     NSString *requestType = httpMethod == 1 ? @"get" : @"post";
-    LEGONetWorkingLog(@"\nrequest success, \nURL:%@ \n%@ \n params:%@\n response:%@\ntoken=%@\ndevice=%@",[self generateGETAbsoluteURL:url params:params],requestType,params,[self tryToParseData:response],[LEGOTokenManager sharedManager].token,[UIDevice currentDevice].identifierForVendor.UUIDString);
+    LEGONetWorkingLog(@"\nrequest success, \nURL:%@ \n%@ \n params:%@\n response:%@\ntoken=%@\ndevice=%@",[self generateGETAbsoluteURL:url params:params httpMethod:httpMethod],requestType,params,[self tryToParseData:response],[LEGOTokenManager sharedManager].token,[UIDevice currentDevice].identifierForVendor.UUIDString);
 }
 
 + (void)logWithFailError:(NSError *)error url:(NSString *)url params:(id)params httpMethod:(NSInteger)httpMethod {
@@ -505,14 +505,14 @@ static NSDictionary *legoHttpHeaders = nil;
         params = @"";
     }
     if ([error code] == NSURLErrorCancelled) {
-        LEGONetWorkingLog(@"\nrequest was canceled mannully, \nURL: %@ \n%@\n %@%@\ntoken:%@\nmessage:%@\ndevice=%@",[self generateGETAbsoluteURL:url params:params],requestType,format,params,[LEGOTokenManager sharedManager].token,message,[UIDevice currentDevice].identifierForVendor.UUIDString);
+        LEGONetWorkingLog(@"\nrequest was canceled mannully, \nURL: %@ \n%@\n %@%@\ntoken:%@\nmessage:%@\ndevice=%@",[self generateGETAbsoluteURL:url params:params httpMethod:httpMethod],requestType,format,params,[LEGOTokenManager sharedManager].token,message,[UIDevice currentDevice].identifierForVendor.UUIDString);
     } else {
-        LEGONetWorkingLog(@"\nrequest error, \nURL: %@ \n%@\n %@%@\n errorInfos:%@\ntoken:%@\nmessager:%@\ndevice=%@",[self generateGETAbsoluteURL:url params:params],requestType,format,params,[error localizedDescription],[LEGOTokenManager sharedManager].token,message,[UIDevice currentDevice].identifierForVendor.UUIDString);
+        LEGONetWorkingLog(@"\nrequest error, \nURL: %@ \n%@\n %@%@\n errorInfos:%@\ntoken:%@\nmessager:%@\ndevice=%@",[self generateGETAbsoluteURL:url params:params httpMethod:httpMethod],requestType,format,params,[error localizedDescription],[LEGOTokenManager sharedManager].token,message,[UIDevice currentDevice].identifierForVendor.UUIDString);
     }
 }
 
-+ (NSString *)generateGETAbsoluteURL:(NSString *)url params:(id)params {
-    if (params == nil || ![params isKindOfClass:[NSDictionary class]] || [params count] == 0) {
++ (NSString *)generateGETAbsoluteURL:(NSString *)url params:(id)params httpMethod:(NSInteger)httpMethod {
+    if (params == nil || ![params isKindOfClass:[NSDictionary class]] || [params count] == 0 || httpMethod == 2) {
         return url;
     }
     NSString *queries = @"";
