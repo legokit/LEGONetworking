@@ -421,7 +421,6 @@ static NSDictionary *legoHttpHeaders = nil;
     });
     LEGOResponse *response = [[LEGOResponse alloc] init];
     response.task = task;
-    response.message = message;
     if ([error code] == NSURLErrorCancelled) {
         // 取消
         response.code = LBRespondStatusCodeFailCancel;
@@ -461,6 +460,7 @@ static NSDictionary *legoHttpHeaders = nil;
     }
     else {
         if (fail) {
+            response.message = message;
             fail(response);
         }
     }
