@@ -291,6 +291,7 @@ static NSDictionary *legoHttpHeaders = nil;
                                   httpMethod:httpMethod];
             }
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            NSLog(@"token=%@",[LEGOTokenManager sharedManager].token);
             [[self allTasks] removeObject:task];
             [self handleCallbackWithError:error task:task fail:fail];
             if ([self isDebug]) {
@@ -445,10 +446,17 @@ static NSDictionary *legoHttpHeaders = nil;
     NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)urlResponse;
     if (httpResponse.statusCode == 401) {
         [LEGOTokenManager clearToken];
+        if (fail) {
+            fail(response);
+        }
         [[NSNotificationCenter defaultCenter] postNotificationName:kNoficationKeyLoginInvalid object:nil];
+        
     }
     else if (httpResponse.statusCode == 400) {
         [LEGOTokenManager clearToken];
+        if (fail) {
+            fail(response);
+        }
         [[NSNotificationCenter defaultCenter] postNotificationName:kNoficationKeyLoginError object:nil];
     }
     else {
