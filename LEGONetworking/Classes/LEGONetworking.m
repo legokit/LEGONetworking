@@ -122,11 +122,12 @@ static NSDictionary *legoHttpHeaders = nil;
     return legoHttpSessionManager;
 }
 
-+ (void)setTokenAndHttps:(AFHTTPSessionManager *)manager {
-    //设置登录用户token
-    [manager.requestSerializer setValue:[LEGOTokenManager sharedManager].token forHTTPHeaderField:@"token"];
-    [manager.requestSerializer setValue:@"1" forHTTPHeaderField:@"platform"];
-    [manager.requestSerializer setValue:[UIDevice currentDevice].identifierForVendor.UUIDString forHTTPHeaderField:@"device"];
++ (void)setDefaultHttpsHeader:(AFHTTPSessionManager *)manager {
+    if (legoHttpHeaders && [legoHttpHeaders isKindOfClass:[NSDictionary class]]) {
+        [legoHttpHeaders enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
+            [manager.requestSerializer setValue:obj forHTTPHeaderField:key];
+        }];
+    }
 }
 
 + (BOOL)shouldEncode {
@@ -159,7 +160,8 @@ static NSDictionary *legoHttpHeaders = nil;
                            success:(LEGOResponseSuccess)success
                               fail:(LEGOResponseFailure)fail {
     return [self.class requestWithUrl:url
-                      httpMedth:1
+                            httpMedth:1
+                          httpsHeader:nil
                          params:params
                     requestType:kLEGORequestTypeJSON
                    responseType:responseType
@@ -195,6 +197,7 @@ static NSDictionary *legoHttpHeaders = nil;
                                fail:(LEGOResponseFailure)fail {
     return [self.class requestWithUrl:url
                             httpMedth:2
+                          httpsHeader:nil
                                params:params
                           requestType:kLEGORequestTypeJSON
                          responseType:responseType
@@ -205,6 +208,7 @@ static NSDictionary *legoHttpHeaders = nil;
 
 + (LEGOURLSessionTask *)requestWithUrl:(NSString *)url
                              httpMedth:(NSUInteger)httpMethod
+                           httpsHeader:(NSDictionary *)httpsHeader
                                 params:(NSDictionary *)params
                            requestType:(LEGORequestType)requestType
                           responseType:(LEGOResponseType)responseType
@@ -249,7 +253,14 @@ static NSDictionary *legoHttpHeaders = nil;
                break;
            }
     }
-    [self setTokenAndHttps:manager];
+    if (httpsHeader && [httpsHeader isKindOfClass:[NSDictionary class]]) {
+        [httpsHeader enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
+            [manager.requestSerializer setValue:obj forHTTPHeaderField:key];
+        }];
+    }
+    else {
+        [self.class setDefaultHttpsHeader:manager];
+    }
 
     LEGOURLSessionTask *session = nil;
     dispatch_async(dispatch_get_main_queue(), ^{

@@ -167,6 +167,27 @@ typedef void (^LEGOUploadProgress)(int64_t bytesWritten, int64_t totalBytesWritt
                                fail:(LEGOResponseFailure)fail;
 
 
+/**
+通用请求
+
+@param url 完整url
+@param httpMethod  get:1, post:2
+@param httpsHeader 请求头，如果为空，则取默认
+@param params 接口中所需的参数
+@param success 请求成功
+@param fail 请求失败
+@return LEGOURLSessionTask
+*/
++ (LEGOURLSessionTask *)requestWithUrl:(NSString *)url
+                             httpMedth:(NSUInteger)httpMethod
+                           httpsHeader:(NSDictionary *)httpsHeader
+                                params:(NSDictionary *)params
+                           requestType:(LEGORequestType)requestType
+                          responseType:(LEGOResponseType)responseType
+                              progress:(LEGODownloadProgress)progress
+                               success:(LEGOResponseSuccess)success
+                                  fail:(LEGOResponseFailure)fail;
+
 
 /// data 上传
 /// @param dataArray LEGOUploadData array

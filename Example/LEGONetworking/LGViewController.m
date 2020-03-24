@@ -99,6 +99,18 @@
 //        kLEGONetworkStatusReachableViaWiFi = 2    // WIFI网络
 //    };
     
+    
+    //    //设置登录用户token
+    //    [manager.requestSerializer setValue:[LEGOTokenManager sharedManager].token forHTTPHeaderField:@"token"];
+    //    [manager.requestSerializer setValue:@"1" forHTTPHeaderField:@"platform"];
+    //    [manager.requestSerializer setValue:[UIDevice currentDevice].identifierForVendor.UUIDString forHTTPHeaderField:@"device"];
+    NSDictionary *httpsHead = @{
+        @"token":[LEGOTokenManager sharedManager].token,
+        @"platform":@"1",
+        @"device":[UIDevice currentDevice].identifierForVendor.UUIDString
+    };
+    [LEGONetworking configCommonHttpHeaders:httpsHead];
+    
     // 设置超时时间
     [LEGONetworking setTimeout:60];
     
