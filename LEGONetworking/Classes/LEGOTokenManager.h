@@ -12,10 +12,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface LEGOTokenManager : NSObject
 @property (nonatomic, copy, readonly) NSString *token;
+@property (nonatomic, copy, readonly) NSString *httpHeadKey;
 
 + (instancetype)sharedManager;
 
 + (void)saveToken:(NSString *)token;
+
++ (void)saveToken:(NSString *)token httpHeadKey:(NSString *)httpHeadKey;
 
 + (void)clearToken;
 @end

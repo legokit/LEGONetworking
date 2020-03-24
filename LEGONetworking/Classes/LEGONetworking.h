@@ -102,6 +102,11 @@ typedef void (^LEGOUploadProgress)(int64_t bytesWritten, int64_t totalBytesWritt
 + (void)configCommonHttpHeaders:(NSDictionary *)httpHeaders;
 
 /**
+ 获取配置公共的请求头
+  */
++ (NSDictionary *)getHttpHeaders;
+
+/**
  配置请求格式，默认为JSON。如果要求传递XML或者PLIST，请在全局配置一下
  
  @param requestType 请求格式，默认为json
@@ -204,6 +209,7 @@ typedef void (^LEGOUploadProgress)(int64_t bytesWritten, int64_t totalBytesWritt
                          responseType:(LEGOResponseType)responseType
                               success:(LEGOResponseSuccess)success
                                  fail:(LEGOResponseFailure)fail;
+
 
 /**
  取消某个请求。如果是要取消某个请求，最好是引用接口所返回来的LEGOURLSessionTask对象，然后调用对象的cancel方法。如果不想引用对象，这里额外提供了一种方法来实现取消某个请求

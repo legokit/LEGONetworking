@@ -8,6 +8,7 @@
 
 #import "LGViewController.h"
 #import <LEGONetworking/LEGONetworking.h>
+#import <LEGONetworking/LEGOTokenManager.h>
 
 @interface LGViewController ()
 
@@ -105,11 +106,13 @@
     //    [manager.requestSerializer setValue:@"1" forHTTPHeaderField:@"platform"];
     //    [manager.requestSerializer setValue:[UIDevice currentDevice].identifierForVendor.UUIDString forHTTPHeaderField:@"device"];
     NSDictionary *httpsHead = @{
-        @"token":[LEGOTokenManager sharedManager].token,
         @"platform":@"1",
         @"device":[UIDevice currentDevice].identifierForVendor.UUIDString
     };
     [LEGONetworking configCommonHttpHeaders:httpsHead];
+    
+    [LEGOTokenManager saveToken:@""];
+    [LEGOTokenManager saveToken:@"" httpHeadKey:@"token"];
     
     // 设置超时时间
     [LEGONetworking setTimeout:60];

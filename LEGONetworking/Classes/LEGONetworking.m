@@ -96,6 +96,11 @@ static NSDictionary *legoHttpHeaders = nil;
     legoHttpHeaders = httpHeaders;
 }
 
++ (NSDictionary *)getHttpHeaders
+{
+    return legoHttpHeaders;
+}
+
 + (void)configRequestType:(LEGORequestType)requestType
              responseType:(LEGOResponseType)responseType
       shouldAutoEncodeUrl:(BOOL)shouldAutoEncode {
@@ -128,6 +133,7 @@ static NSDictionary *legoHttpHeaders = nil;
             [manager.requestSerializer setValue:obj forHTTPHeaderField:key];
         }];
     }
+    [manager.requestSerializer setValue:[LEGOTokenManager sharedManager].token forHTTPHeaderField:[LEGOTokenManager sharedManager].httpHeadKey];
 }
 
 + (BOOL)shouldEncode {

@@ -9,9 +9,12 @@
 #import "LEGOTokenManager.h"
 
 NSString *const kUserDefaultsKeyTokenManagerToken = @"kUserDefaultsKeyTokenManagerToken";
+NSString *const kUserDefaultsKeyTokenManagerHttpHeadKey = @"kUserDefaultsKeyTokenManagerHttpHeadKey";
 
 @interface LEGOTokenManager ()
 @property (nonatomic, copy) NSString *token;
+@property (nonatomic, copy) NSString *httpHeadKey;
+
 @end
 
 @implementation LEGOTokenManager
@@ -32,9 +35,29 @@ NSString *const kUserDefaultsKeyTokenManagerToken = @"kUserDefaultsKeyTokenManag
     return _token;
 }
 
+- (NSString *)httpHeadKey {
+    if (!_httpHeadKey) {
+        NSString *key = [[NSUserDefaults standardUserDefaults] stringForKey:kUserDefaultsKeyTokenManagerHttpHeadKey];
+        if (key && key.length) {
+            _httpHeadKey = key;
+        }
+        else {
+            _httpHeadKey = @"token";
+        }
+    }
+    return _httpHeadKey;
+}
+
 + (void)saveToken:(NSString *)token {
     [LEGOTokenManager sharedManager].token = token;
     [[NSUserDefaults standardUserDefaults] setObject:token forKey:kUserDefaultsKeyTokenManagerToken];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
++ (void)saveToken:(NSString *)token httpHeadKey:(NSString *)httpHeadKey {
+    [self.class saveToken:token];
+    [LEGOTokenManager sharedManager].httpHeadKey = httpHeadKey;
+    [[NSUserDefaults standardUserDefaults] setObject:httpHeadKey forKey:kUserDefaultsKeyTokenManagerHttpHeadKey];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
