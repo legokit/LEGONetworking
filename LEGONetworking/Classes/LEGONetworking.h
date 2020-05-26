@@ -73,13 +73,6 @@ typedef void (^LEGOUploadProgress)(int64_t bytesWritten, int64_t totalBytesWritt
 + (void)goon;
 
 /**
- 开启或关闭控制台打印信息
- 
- @param isDebug 默认是NO，debug环境建议打开
- */
-+ (void)enableInterfaceDebug:(BOOL)isDebug;
-
-/**
  获取当前网络状态
  
  @return LEGONetworkStatus
@@ -209,6 +202,7 @@ typedef void (^LEGOUploadProgress)(int64_t bytesWritten, int64_t totalBytesWritt
 
 + (LEGOURLSessionTask *)uploadWithUrl:(NSString *)url
                             dataArray:(NSArray <LEGOUploadData *> *)dataArray
+                          httpsHeader:(NSDictionary *)httpsHeader
                                params:(NSDictionary *)params
                            httpMethod:(NSString *)httpMethod
                              progress:(void (^)(NSProgress *uploadProgress))progress
@@ -233,11 +227,12 @@ typedef void (^LEGOUploadProgress)(int64_t bytesWritten, int64_t totalBytesWritt
 @end
 
 @interface LEGOResponse : NSObject
-@property (nonatomic, assign) LEGORespondStatusCode code;
 @property (nonatomic, strong) id data;
-@property (nonatomic, strong) NSString *message;
-@property (nonatomic, strong) NSError *error;
 @property (nonatomic, strong) NSURLSessionDataTask *task;
+@property (nonatomic, assign) NSInteger statusCode;
+@property (nonatomic, strong) NSError *error;
+@property (nonatomic, strong) NSString *message;
+@property (nonatomic, assign) LEGORespondStatusCode code;
 
 @end
 

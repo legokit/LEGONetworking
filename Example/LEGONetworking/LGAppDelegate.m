@@ -12,7 +12,6 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    [LEGONetworking enableInterfaceDebug:YES];
     [LEGONetworking configRequestType:kLEGORequestTypeJSON
                          responseType:kLEGOResponseTypeJSON
                   shouldAutoEncodeUrl:YES];

@@ -11,7 +11,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface LEGOInterceptor : NSObject
 
-@property (nonatomic, strong) BOOL (^interceptor)(NSData *data, LEGOResponse *response);
+@property (nonatomic, copy) BOOL (^sucessInterceptor)(NSData *data, LEGOResponse *response);
+@property (nonatomic, copy) void (^failInterceptor)(NSData *data, LEGOResponse *response, NSString *url, NSDictionary *params, LEGOHttpMethodType httpMethod);
 
 + (instancetype)sharedManager;
 
