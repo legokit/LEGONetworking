@@ -11,9 +11,6 @@
 #import "NSString+LGMD5.h"
 #import "LEGOInterceptor.h"
 
-NSString *const kNoficationKeyLoginInvalid = @"kNoficationKeyLoginInvalid";  //登录失效
-NSString *const kNoficationKeyLoginError = @"kNoficationKeyLoginError";  //登录异常
-
 static LEGONetworkStatus leogNetworkStatus = kLEGONetworkStatusUnknown;
 static LEGORequestType  legoRequestType  = kLEGORequestTypeJSON;
 static LEGOResponseType legoResponseType = kLEGOResponseTypeData;

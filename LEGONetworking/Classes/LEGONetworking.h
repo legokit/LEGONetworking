@@ -10,9 +10,6 @@
 #import "LEGOTokenManager.h"
 @class LEGOResponse,LEGOUploadData;
 
-UIKIT_EXTERN NSString *const kNoficationKeyLoginInvalid;    //登录失效
-UIKIT_EXTERN NSString *const kNoficationKeyLoginError;    //登录异常
-
 typedef NSURLSessionTask LEGOURLSessionTask;
 typedef void (^LEGOResponseSuccess) (LEGOResponse *response);
 typedef void (^LEGOResponseFailure) (LEGOResponse *response);
