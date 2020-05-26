@@ -10,6 +10,7 @@
 #endif
 #endif
 
+#import "LEGOInterceptor.h"
 #import "LEGONetworking.h"
 #import "LEGOTokenManager.h"
 #import "NSString+LGMD5.h"

@@ -7,55 +7,48 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		004E949DF07AE7B4A83FA37F94F9E3A7 /* AFURLRequestSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = D7AE3156C2D065F5680472D13DB47283 /* AFURLRequestSerialization.m */; };
+		004E949DF07AE7B4A83FA37F94F9E3A7 /* AFURLRequestSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EDE43EA1C3E259B07187464E7D8EEB5 /* AFURLRequestSerialization.m */; };
 		071555C093F45790BACA15521F5DF8CC /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F5AA5E75B5225CABA5D67542FC40996 /* MobileCoreServices.framework */; };
+		0824379B6D0092B0F8BD9B75A7044D70 /* LEGOInterceptor.m in Sources */ = {isa = PBXBuildFile; fileRef = 1280C4BE30996F5E5CC527D160938105 /* LEGOInterceptor.m */; };
+		0C99599F2EA164E486752C4C00BB4595 /* LEGONetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CAFBA6E619F7EE1341AB2D709AAD5A4 /* LEGONetworking.m */; };
+		128E33880F990EA7408F4E4781A201C5 /* LEGOInterceptor.h in Headers */ = {isa = PBXBuildFile; fileRef = 5790304A9784A4AC7DBDF931826223AA /* LEGOInterceptor.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1CD4324EB2686469422A53CA47F75B1A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 29670A9A26E9266FE6E8455C11E3127C /* Foundation.framework */; };
-		252C9BD279B53A5D6A5074D4BC1E9CC5 /* AFSecurityPolicy.m in Sources */ = {isa = PBXBuildFile; fileRef = C940A6C1B8F597B72149477E3C735207 /* AFSecurityPolicy.m */; };
-		2606153E172A2589B093226B741CE334 /* AFHTTPSessionManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 9AB5F6C5B4B0F965DE031DEDC16D2CA5 /* AFHTTPSessionManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		2AB12B591125FCE6AFA89BDC6CF6EE95 /* AFURLSessionManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 6AB65BAF4756919E2F981536297368A3 /* AFURLSessionManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		252C9BD279B53A5D6A5074D4BC1E9CC5 /* AFSecurityPolicy.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B3CD44F4AD1715B3E04D04C55CF4C3B /* AFSecurityPolicy.m */; };
+		2606153E172A2589B093226B741CE334 /* AFHTTPSessionManager.h in Headers */ = {isa = PBXBuildFile; fileRef = E0A7FDDE71B19AAAA6A2558CD8AC7C6F /* AFHTTPSessionManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		2AB12B591125FCE6AFA89BDC6CF6EE95 /* AFURLSessionManager.h in Headers */ = {isa = PBXBuildFile; fileRef = DD53F204055D08EAF82E4912DFE7A407 /* AFURLSessionManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		2E11CF8ECD3E7220314237AB847105FE /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AC66F3B348F8B165453B131F6E0BFEC /* CoreGraphics.framework */; };
-		305324788E685264849641C7AA289839 /* LEGOTokenManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 648A2E136BAED663F3393EF347209BB7 /* LEGOTokenManager.m */; };
 		3891E1A947942E03FCF9A69AA8357A22 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C8D9023906BDF78712ED36026D054A92 /* Security.framework */; };
 		3E25436153026EC208F9F82412B87716 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 29670A9A26E9266FE6E8455C11E3127C /* Foundation.framework */; };
-		4DEEEB965FFB020183C0BF14C1C661BD /* LEGOTokenManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 4B244E8056997A458F3A382F1F42B64F /* LEGOTokenManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		66589771977CB13B36E51766DF20CB97 /* AFURLResponseSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = D4831F6DEB1C67DA03F8398B3F2D371B /* AFURLResponseSerialization.m */; };
-		66DBC25CE50D0E67F015AF878D51512B /* AFNetworking-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C3DE1F38A811CFDA48D248E9A027B16 /* AFNetworking-dummy.m */; };
-		6C85C9295A13D8886C427CF73878E50C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 29670A9A26E9266FE6E8455C11E3127C /* Foundation.framework */; };
-		7548852A3A66AF5005A218ACA236E8BB /* LEGONetworking.h in Headers */ = {isa = PBXBuildFile; fileRef = 0A4738E9E70C3EB87513F37C3B346E15 /* LEGONetworking.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4E6E5FFBDE9A775ED1AEA57DC605223B /* LEGOTokenManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 9321B01D7C9012020541A933E0866A0D /* LEGOTokenManager.m */; };
+		66589771977CB13B36E51766DF20CB97 /* AFURLResponseSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 75AD04D6D5917909DBCEF368709292D6 /* AFURLResponseSerialization.m */; };
+		66DBC25CE50D0E67F015AF878D51512B /* AFNetworking-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E37EDCC63B00E8FDAD49805695E817B /* AFNetworking-dummy.m */; };
 		79D45CC2A2489ED93D87C320D0F8EA9A /* Pods-LEGONetworking_Example-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = A5E26095B6F99A9AC415473A36D6A48D /* Pods-LEGONetworking_Example-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		7EED2598C9687C4B5E8DAC2BDBEDB80F /* LEGONetworking-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = F9220633FF0734F71D10A73899D02557 /* LEGONetworking-dummy.m */; };
 		886A3E9DD91C94BAED7C9146695420F2 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DCA9F9F50F9A195E2B327306DECEB86 /* SystemConfiguration.framework */; };
-		902D3AC77A4A0EC157689DE43D067594 /* AFCompatibilityMacros.h in Headers */ = {isa = PBXBuildFile; fileRef = 7AEA682DC29B00F884967A9AD2AEC122 /* AFCompatibilityMacros.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		94DD1A0D27D1CDBCE6656B3AE3026368 /* LEGONetworking-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 9D5D1877B4D194303EDBB81B8AB37BFA /* LEGONetworking-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8BA3DD9595A7C3D4C424EF0732D342B0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 29670A9A26E9266FE6E8455C11E3127C /* Foundation.framework */; };
+		902D3AC77A4A0EC157689DE43D067594 /* AFCompatibilityMacros.h in Headers */ = {isa = PBXBuildFile; fileRef = 2CA53D56FA82346EBC8766ABA67CC9CA /* AFCompatibilityMacros.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9414C0D4FA6D15A968AAFC50637C95EB /* NSString+LGMD5.h in Headers */ = {isa = PBXBuildFile; fileRef = FA78CF56AEDE5E5D44DB22E5BD0B54D6 /* NSString+LGMD5.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		96527A75984A108058FE2F00DA70ADBE /* Pods-LEGONetworking_Tests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 0F24EB0393C35493220BE1B0B0BB42AB /* Pods-LEGONetworking_Tests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		9C7AC9B98D9DC891A33141AAA551E968 /* AFURLRequestSerialization.h in Headers */ = {isa = PBXBuildFile; fileRef = DE1EB0968251E0A09BE36CE1D3F3E8FA /* AFURLRequestSerialization.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		A2067385E34E2BF10E2DEF909C4AAE04 /* AFNetworkReachabilityManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 50A112ADC3B021099D06F5C9881BFB89 /* AFNetworkReachabilityManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		986A9B56FD219EBD43A5B9E10D223CBA /* LEGONetworking.h in Headers */ = {isa = PBXBuildFile; fileRef = 94E6DAC38FA71DC30ADFD4DC2C3D017A /* LEGONetworking.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9AB72DD1C86A618DF8402DAC1E136746 /* LEGONetworking-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 12BFE83334B65F781B71E6FC5A1269BC /* LEGONetworking-dummy.m */; };
+		9C7AC9B98D9DC891A33141AAA551E968 /* AFURLRequestSerialization.h in Headers */ = {isa = PBXBuildFile; fileRef = F55F2C43E36618F8F10421A4EE636A3E /* AFURLRequestSerialization.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A2067385E34E2BF10E2DEF909C4AAE04 /* AFNetworkReachabilityManager.h in Headers */ = {isa = PBXBuildFile; fileRef = D79C7C927F36F700D76C4A3230DF1062 /* AFNetworkReachabilityManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A2B52CC6E9F45C1969A55E4252E3182A /* LEGONetworking-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 5DF7D395D21A14C1F21DBE1EDA988209 /* LEGONetworking-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A638E4509B5787710E7CC92B7E28FABE /* Pods-LEGONetworking_Tests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B7AA864425ABDDDC7F65C301FFF80EC /* Pods-LEGONetworking_Tests-dummy.m */; };
-		B6FBA27BA61E7705A420F66ECF21D22A /* LEGONetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 213E818AD15DF691BCA81F2B8B1770F1 /* LEGONetworking.m */; };
-		CE5AB3DDD904217DABD585BF685C3D20 /* NSString+LGMD5.h in Headers */ = {isa = PBXBuildFile; fileRef = 8008506E9CADBD90DD18393BC0E5E5A2 /* NSString+LGMD5.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		D38408CE9900FC8BEB4623735CED9FDC /* NSString+LGMD5.m in Sources */ = {isa = PBXBuildFile; fileRef = 353CAFA048C405E53FB37C2FF44DA660 /* NSString+LGMD5.m */; };
-		D7D25B5722CE584AA6169CA5B9731854 /* AFNetworking-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = AE049C0A9FD8C494E8D4ED9BA48747C2 /* AFNetworking-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A835812F32484004E07B05C8841C5E0A /* AFNetworking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4380AEF80628ADE3D82E532B4AC4E6E9 /* AFNetworking.framework */; };
+		C1202B2B4915A5449E12DD676A30C325 /* LEGOTokenManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 99F889494659914B703D41F5AEA4106A /* LEGOTokenManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C81C1D446BF4D25ABEEA8517F6904FAB /* NSString+LGMD5.m in Sources */ = {isa = PBXBuildFile; fileRef = 49F8B13E6DFFBD2C845DB5E52819225F /* NSString+LGMD5.m */; };
+		D7D25B5722CE584AA6169CA5B9731854 /* AFNetworking-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 08464A244E2874952F92BCCCA8E768F7 /* AFNetworking-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DEE7D42BA98EC220CFE9ED552BAEDBDE /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 29670A9A26E9266FE6E8455C11E3127C /* Foundation.framework */; };
-		E06389FE80CBFAE6CCF395163845965B /* AFHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B908096D71028626D6F9DC7718C819C3 /* AFHTTPSessionManager.m */; };
-		E4B6EF59E06D0F7F805C1348019C5968 /* AFNetworking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4380AEF80628ADE3D82E532B4AC4E6E9 /* AFNetworking.framework */; };
-		E89A60CA247CC3FA00FD1503 /* LEGOInterceptor.h in Headers */ = {isa = PBXBuildFile; fileRef = E89A60C8247CC3FA00FD1503 /* LEGOInterceptor.h */; };
-		E89A60CB247CC3FA00FD1503 /* LEGOInterceptor.m in Sources */ = {isa = PBXBuildFile; fileRef = E89A60C9247CC3FA00FD1503 /* LEGOInterceptor.m */; };
-		EAC3FFEA80CFE0DD55C11B4448DC8324 /* AFSecurityPolicy.h in Headers */ = {isa = PBXBuildFile; fileRef = D4B6E0868F4AD5FC12CEC4F65683D832 /* AFSecurityPolicy.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		F4D969EE3C3BB7765EB3A02CA8759BE0 /* AFNetworkReachabilityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BA4992A3583EAA47B35C86FEAD2D18F /* AFNetworkReachabilityManager.m */; };
+		E06389FE80CBFAE6CCF395163845965B /* AFHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F5C09B8B66809481321CF95F0C1F103F /* AFHTTPSessionManager.m */; };
+		EAC3FFEA80CFE0DD55C11B4448DC8324 /* AFSecurityPolicy.h in Headers */ = {isa = PBXBuildFile; fileRef = E70FC5E2BB3160C1C80B1F2DB423270B /* AFSecurityPolicy.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F4D969EE3C3BB7765EB3A02CA8759BE0 /* AFNetworkReachabilityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 823767B82E98733458EB3FB18A3041CD /* AFNetworkReachabilityManager.m */; };
 		FA8087FC41538FDE3F29AE00F4D5F41A /* Pods-LEGONetworking_Example-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = EA36C8327334E665C88A95248C2F02A6 /* Pods-LEGONetworking_Example-dummy.m */; };
-		FD1A347074B1B88A7C7541C853F06763 /* AFURLResponseSerialization.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FBF5126ED6FF08007B3095358A469E8 /* AFURLResponseSerialization.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		FE795EDCFA8A9712C7CEF3421A8B7823 /* AFURLSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C4B28A685B23249AF311C52D5CE73D7 /* AFURLSessionManager.m */; };
+		FD1A347074B1B88A7C7541C853F06763 /* AFURLResponseSerialization.h in Headers */ = {isa = PBXBuildFile; fileRef = EA425EC79821418CC9BE542389DD123F /* AFURLResponseSerialization.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		FE795EDCFA8A9712C7CEF3421A8B7823 /* AFURLSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = ECD462B76101104B5E497CE967B6ACA8 /* AFURLSessionManager.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
 		2421E5CB81C77B1989E889B03B71601B /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 0130B3724283586C0E9D2A112D4F2AA1;
-			remoteInfo = AFNetworking;
-		};
-		418B99C42AEED8C92ADD3808F80A8392 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
 			proxyType = 1;
@@ -69,6 +62,13 @@
 			remoteGlobalIDString = F4B08650544C0A6EC5B60D1149B05C47;
 			remoteInfo = "Pods-LEGONetworking_Example";
 		};
+		FAB79ECC5B7C87B243A4BA3703CE695A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 0130B3724283586C0E9D2A112D4F2AA1;
+			remoteInfo = AFNetworking;
+		};
 		FFDA5808220FA9894AA8A5260A8C94D6 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
@@ -79,70 +79,72 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		0A4738E9E70C3EB87513F37C3B346E15 /* LEGONetworking.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = LEGONetworking.h; path = LEGONetworking/Classes/LEGONetworking.h; sourceTree = "<group>"; };
+		08464A244E2874952F92BCCCA8E768F7 /* AFNetworking-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "AFNetworking-umbrella.h"; sourceTree = "<group>"; };
+		08BD7F6C075B6988BC23D524BBEBB54E /* LEGONetworking.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; path = LEGONetworking.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		0B907A3A9A95A2D8D367B611FE4D859C /* LEGONetworking.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = LEGONetworking.modulemap; sourceTree = "<group>"; };
+		0EDE43EA1C3E259B07187464E7D8EEB5 /* AFURLRequestSerialization.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = AFURLRequestSerialization.m; path = AFNetworking/AFURLRequestSerialization.m; sourceTree = "<group>"; };
 		0F24EB0393C35493220BE1B0B0BB42AB /* Pods-LEGONetworking_Tests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-LEGONetworking_Tests-umbrella.h"; sourceTree = "<group>"; };
 		121A4C4EBC9DD16C2F2937166082BD1B /* Pods-LEGONetworking_Example-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-LEGONetworking_Example-acknowledgements.markdown"; sourceTree = "<group>"; };
 		1246DDDA164D1470133BF9A2AFD99D0A /* Pods-LEGONetworking_Example-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-LEGONetworking_Example-acknowledgements.plist"; sourceTree = "<group>"; };
-		1C3DE1F38A811CFDA48D248E9A027B16 /* AFNetworking-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "AFNetworking-dummy.m"; sourceTree = "<group>"; };
+		1280C4BE30996F5E5CC527D160938105 /* LEGOInterceptor.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = LEGOInterceptor.m; path = LEGONetworking/Classes/LEGOInterceptor.m; sourceTree = "<group>"; };
+		12BFE83334B65F781B71E6FC5A1269BC /* LEGONetworking-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "LEGONetworking-dummy.m"; sourceTree = "<group>"; };
+		1B3CD44F4AD1715B3E04D04C55CF4C3B /* AFSecurityPolicy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = AFSecurityPolicy.m; path = AFNetworking/AFSecurityPolicy.m; sourceTree = "<group>"; };
 		20EC772126E0EC1E3ED8C8A8C2EF60A3 /* Pods-LEGONetworking_Tests-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-LEGONetworking_Tests-Info.plist"; sourceTree = "<group>"; };
-		213E818AD15DF691BCA81F2B8B1770F1 /* LEGONetworking.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = LEGONetworking.m; path = LEGONetworking/Classes/LEGONetworking.m; sourceTree = "<group>"; };
+		210E4DFA3042D0510CB899989BA01E3D /* LEGONetworking-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "LEGONetworking-Info.plist"; sourceTree = "<group>"; };
 		29670A9A26E9266FE6E8455C11E3127C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.2.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		2CA53D56FA82346EBC8766ABA67CC9CA /* AFCompatibilityMacros.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = AFCompatibilityMacros.h; path = AFNetworking/AFCompatibilityMacros.h; sourceTree = "<group>"; };
+		2E37EDCC63B00E8FDAD49805695E817B /* AFNetworking-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "AFNetworking-dummy.m"; sourceTree = "<group>"; };
 		2F5AA5E75B5225CABA5D67542FC40996 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.2.sdk/System/Library/Frameworks/MobileCoreServices.framework; sourceTree = DEVELOPER_DIR; };
-		353CAFA048C405E53FB37C2FF44DA660 /* NSString+LGMD5.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "NSString+LGMD5.m"; path = "LEGONetworking/Classes/NSString+LGMD5.m"; sourceTree = "<group>"; };
-		394AF0A01FF6DA896FEE32B3EA368C97 /* Pods_LEGONetworking_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LEGONetworking_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		394AF0A01FF6DA896FEE32B3EA368C97 /* Pods_LEGONetworking_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_LEGONetworking_Tests.framework; path = "Pods-LEGONetworking_Tests.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4380AEF80628ADE3D82E532B4AC4E6E9 /* AFNetworking.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AFNetworking.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		47FDCCAF8C065CDC0FA5B8BCF37AAF4D /* AFNetworking-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "AFNetworking-Info.plist"; sourceTree = "<group>"; };
+		49F8B13E6DFFBD2C845DB5E52819225F /* NSString+LGMD5.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "NSString+LGMD5.m"; path = "LEGONetworking/Classes/NSString+LGMD5.m"; sourceTree = "<group>"; };
 		4ADC5BAD048F1811FF8E8214CA781ECF /* Pods-LEGONetworking_Tests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-LEGONetworking_Tests-acknowledgements.plist"; sourceTree = "<group>"; };
-		4B244E8056997A458F3A382F1F42B64F /* LEGOTokenManager.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = LEGOTokenManager.h; path = LEGONetworking/Classes/LEGOTokenManager.h; sourceTree = "<group>"; };
-		4D053ADD271980BB5CCA5D4AF98A9880 /* Pods_LEGONetworking_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LEGONetworking_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		50A112ADC3B021099D06F5C9881BFB89 /* AFNetworkReachabilityManager.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = AFNetworkReachabilityManager.h; path = AFNetworking/AFNetworkReachabilityManager.h; sourceTree = "<group>"; };
-		5C46F854160C280B736FBFEF199C13FD /* AFNetworking-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "AFNetworking-prefix.pch"; sourceTree = "<group>"; };
+		4BA96B432304B0894579CFAF93268317 /* AFNetworking.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = AFNetworking.debug.xcconfig; sourceTree = "<group>"; };
+		4D053ADD271980BB5CCA5D4AF98A9880 /* Pods_LEGONetworking_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_LEGONetworking_Example.framework; path = "Pods-LEGONetworking_Example.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		5790304A9784A4AC7DBDF931826223AA /* LEGOInterceptor.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = LEGOInterceptor.h; path = LEGONetworking/Classes/LEGOInterceptor.h; sourceTree = "<group>"; };
 		5DCA9F9F50F9A195E2B327306DECEB86 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.2.sdk/System/Library/Frameworks/SystemConfiguration.framework; sourceTree = DEVELOPER_DIR; };
+		5DF7D395D21A14C1F21DBE1EDA988209 /* LEGONetworking-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "LEGONetworking-umbrella.h"; sourceTree = "<group>"; };
 		63FAE9E6E6177DD8392BBB9B7AD23E8B /* Pods-LEGONetworking_Example-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-LEGONetworking_Example-Info.plist"; sourceTree = "<group>"; };
-		648A2E136BAED663F3393EF347209BB7 /* LEGOTokenManager.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = LEGOTokenManager.m; path = LEGONetworking/Classes/LEGOTokenManager.m; sourceTree = "<group>"; };
-		6AB65BAF4756919E2F981536297368A3 /* AFURLSessionManager.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = AFURLSessionManager.h; path = AFNetworking/AFURLSessionManager.h; sourceTree = "<group>"; };
-		6C4B28A685B23249AF311C52D5CE73D7 /* AFURLSessionManager.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = AFURLSessionManager.m; path = AFNetworking/AFURLSessionManager.m; sourceTree = "<group>"; };
+		64C891789EBCF764DC50BCD7D18A5328 /* AFNetworking-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "AFNetworking-Info.plist"; sourceTree = "<group>"; };
+		6CF4123E4F0F829EDD4935C75AAB4693 /* LEGONetworking.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = LEGONetworking.debug.xcconfig; sourceTree = "<group>"; };
 		6D7809CD51659E2F8F92327AF1A831E0 /* Pods-LEGONetworking_Tests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-LEGONetworking_Tests.modulemap"; sourceTree = "<group>"; };
-		6FBF5126ED6FF08007B3095358A469E8 /* AFURLResponseSerialization.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = AFURLResponseSerialization.h; path = AFNetworking/AFURLResponseSerialization.h; sourceTree = "<group>"; };
+		75AD04D6D5917909DBCEF368709292D6 /* AFURLResponseSerialization.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = AFURLResponseSerialization.m; path = AFNetworking/AFURLResponseSerialization.m; sourceTree = "<group>"; };
 		7729923F88A4DDFF4D2FCE73DC2F4E12 /* Pods-LEGONetworking_Tests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-LEGONetworking_Tests-acknowledgements.markdown"; sourceTree = "<group>"; };
 		7AC66F3B348F8B165453B131F6E0BFEC /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.2.sdk/System/Library/Frameworks/CoreGraphics.framework; sourceTree = DEVELOPER_DIR; };
-		7ADC3F71AA64DE9A4302F62C481CFBCB /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
-		7AEA682DC29B00F884967A9AD2AEC122 /* AFCompatibilityMacros.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = AFCompatibilityMacros.h; path = AFNetworking/AFCompatibilityMacros.h; sourceTree = "<group>"; };
 		7B7AA864425ABDDDC7F65C301FFF80EC /* Pods-LEGONetworking_Tests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-LEGONetworking_Tests-dummy.m"; sourceTree = "<group>"; };
-		7BA4992A3583EAA47B35C86FEAD2D18F /* AFNetworkReachabilityManager.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = AFNetworkReachabilityManager.m; path = AFNetworking/AFNetworkReachabilityManager.m; sourceTree = "<group>"; };
-		8008506E9CADBD90DD18393BC0E5E5A2 /* NSString+LGMD5.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "NSString+LGMD5.h"; path = "LEGONetworking/Classes/NSString+LGMD5.h"; sourceTree = "<group>"; };
-		94D59244161B6F974329A6366C329DED /* AFNetworking.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = AFNetworking.xcconfig; sourceTree = "<group>"; };
-		9AB5F6C5B4B0F965DE031DEDC16D2CA5 /* AFHTTPSessionManager.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = AFHTTPSessionManager.h; path = AFNetworking/AFHTTPSessionManager.h; sourceTree = "<group>"; };
-		9D5D1877B4D194303EDBB81B8AB37BFA /* LEGONetworking-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "LEGONetworking-umbrella.h"; sourceTree = "<group>"; };
-		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		A10E239C91F4E8EE36436D6A1785EBC8 /* LEGONetworking.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; path = LEGONetworking.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		A253B39276ACA2BC9B68609F853C1981 /* AFNetworking.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = AFNetworking.modulemap; sourceTree = "<group>"; };
-		A4FA15D44DF6BAC7550EDEED10862AA3 /* AFNetworking.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AFNetworking.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7CAFBA6E619F7EE1341AB2D709AAD5A4 /* LEGONetworking.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = LEGONetworking.m; path = LEGONetworking/Classes/LEGONetworking.m; sourceTree = "<group>"; };
+		7F76163B3FFB43D9760073E08B72B13C /* AFNetworking-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "AFNetworking-prefix.pch"; sourceTree = "<group>"; };
+		823767B82E98733458EB3FB18A3041CD /* AFNetworkReachabilityManager.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = AFNetworkReachabilityManager.m; path = AFNetworking/AFNetworkReachabilityManager.m; sourceTree = "<group>"; };
+		8A711625BDA37D4C89879948B38FF716 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; path = LICENSE; sourceTree = "<group>"; };
+		9321B01D7C9012020541A933E0866A0D /* LEGOTokenManager.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = LEGOTokenManager.m; path = LEGONetworking/Classes/LEGOTokenManager.m; sourceTree = "<group>"; };
+		94E6DAC38FA71DC30ADFD4DC2C3D017A /* LEGONetworking.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = LEGONetworking.h; path = LEGONetworking/Classes/LEGONetworking.h; sourceTree = "<group>"; };
+		99F889494659914B703D41F5AEA4106A /* LEGOTokenManager.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = LEGOTokenManager.h; path = LEGONetworking/Classes/LEGOTokenManager.h; sourceTree = "<group>"; };
+		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		A4FA15D44DF6BAC7550EDEED10862AA3 /* AFNetworking.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = AFNetworking.framework; path = AFNetworking.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A54B74EB06065EE61DC9DD5E88E68E76 /* LEGONetworking.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = LEGONetworking.release.xcconfig; sourceTree = "<group>"; };
 		A5E26095B6F99A9AC415473A36D6A48D /* Pods-LEGONetworking_Example-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-LEGONetworking_Example-umbrella.h"; sourceTree = "<group>"; };
-		AE049C0A9FD8C494E8D4ED9BA48747C2 /* AFNetworking-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "AFNetworking-umbrella.h"; sourceTree = "<group>"; };
-		B908096D71028626D6F9DC7718C819C3 /* AFHTTPSessionManager.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = AFHTTPSessionManager.m; path = AFNetworking/AFHTTPSessionManager.m; sourceTree = "<group>"; };
-		BACDCA042D80286743766573FE6DE79F /* LEGONetworking.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = LEGONetworking.modulemap; sourceTree = "<group>"; };
-		BEE08B05F974401407A46A992801793D /* LEGONetworking-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "LEGONetworking-prefix.pch"; sourceTree = "<group>"; };
-		C3E22D797882CFA7990EF1756E92F4A4 /* LEGONetworking-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "LEGONetworking-Info.plist"; sourceTree = "<group>"; };
+		B52743ECF53428C018D7D8BE92C10A94 /* AFNetworking.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = AFNetworking.modulemap; sourceTree = "<group>"; };
 		C8D9023906BDF78712ED36026D054A92 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.2.sdk/System/Library/Frameworks/Security.framework; sourceTree = DEVELOPER_DIR; };
-		C940A6C1B8F597B72149477E3C735207 /* AFSecurityPolicy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = AFSecurityPolicy.m; path = AFNetworking/AFSecurityPolicy.m; sourceTree = "<group>"; };
-		C9DCB684D4420454ACBE7538AB5A271E /* LEGONetworking.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = LEGONetworking.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C9DCB684D4420454ACBE7538AB5A271E /* LEGONetworking.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = LEGONetworking.framework; path = LEGONetworking.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CBB3222E6C88EBBDADA04121C9DB8598 /* Pods-LEGONetworking_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-LEGONetworking_Tests.release.xcconfig"; sourceTree = "<group>"; };
-		D4831F6DEB1C67DA03F8398B3F2D371B /* AFURLResponseSerialization.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = AFURLResponseSerialization.m; path = AFNetworking/AFURLResponseSerialization.m; sourceTree = "<group>"; };
-		D4B6E0868F4AD5FC12CEC4F65683D832 /* AFSecurityPolicy.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = AFSecurityPolicy.h; path = AFNetworking/AFSecurityPolicy.h; sourceTree = "<group>"; };
-		D7AE3156C2D065F5680472D13DB47283 /* AFURLRequestSerialization.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = AFURLRequestSerialization.m; path = AFNetworking/AFURLRequestSerialization.m; sourceTree = "<group>"; };
-		DE1EB0968251E0A09BE36CE1D3F3E8FA /* AFURLRequestSerialization.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = AFURLRequestSerialization.h; path = AFNetworking/AFURLRequestSerialization.h; sourceTree = "<group>"; };
+		D79C7C927F36F700D76C4A3230DF1062 /* AFNetworkReachabilityManager.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = AFNetworkReachabilityManager.h; path = AFNetworking/AFNetworkReachabilityManager.h; sourceTree = "<group>"; };
+		DD1A40B148DA4B94648C4C2985D43C38 /* AFNetworking.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = AFNetworking.release.xcconfig; sourceTree = "<group>"; };
+		DD53F204055D08EAF82E4912DFE7A407 /* AFURLSessionManager.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = AFURLSessionManager.h; path = AFNetworking/AFURLSessionManager.h; sourceTree = "<group>"; };
+		E0A7FDDE71B19AAAA6A2558CD8AC7C6F /* AFHTTPSessionManager.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = AFHTTPSessionManager.h; path = AFNetworking/AFHTTPSessionManager.h; sourceTree = "<group>"; };
+		E52BC47D6A6A42AC02432A6857D94D39 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; path = README.md; sourceTree = "<group>"; };
 		E67D3B825B015B30EB9574DE3EC5439B /* Pods-LEGONetworking_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-LEGONetworking_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		E685F6B33D679145824AFCC6A239EE3A /* Pods-LEGONetworking_Example.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-LEGONetworking_Example.modulemap"; sourceTree = "<group>"; };
-		E89A60C8247CC3FA00FD1503 /* LEGOInterceptor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LEGOInterceptor.h; sourceTree = "<group>"; };
-		E89A60C9247CC3FA00FD1503 /* LEGOInterceptor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LEGOInterceptor.m; sourceTree = "<group>"; };
+		E6AB53F092505B34415E75730FF770E4 /* LEGONetworking-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "LEGONetworking-prefix.pch"; sourceTree = "<group>"; };
+		E70FC5E2BB3160C1C80B1F2DB423270B /* AFSecurityPolicy.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = AFSecurityPolicy.h; path = AFNetworking/AFSecurityPolicy.h; sourceTree = "<group>"; };
 		E8CC920B1B8C9CCC1CA6A8BB2E18FCFC /* Pods-LEGONetworking_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-LEGONetworking_Example.release.xcconfig"; sourceTree = "<group>"; };
 		EA36C8327334E665C88A95248C2F02A6 /* Pods-LEGONetworking_Example-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-LEGONetworking_Example-dummy.m"; sourceTree = "<group>"; };
+		EA425EC79821418CC9BE542389DD123F /* AFURLResponseSerialization.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = AFURLResponseSerialization.h; path = AFNetworking/AFURLResponseSerialization.h; sourceTree = "<group>"; };
+		ECD462B76101104B5E497CE967B6ACA8 /* AFURLSessionManager.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = AFURLSessionManager.m; path = AFNetworking/AFURLSessionManager.m; sourceTree = "<group>"; };
 		EEFD0FA243E0EA2B58A04BC3B611703C /* Pods-LEGONetworking_Example-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-LEGONetworking_Example-frameworks.sh"; sourceTree = "<group>"; };
 		EF915A8A6E6F5A0B9CD7F850AFBD2026 /* Pods-LEGONetworking_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-LEGONetworking_Example.debug.xcconfig"; sourceTree = "<group>"; };
-		F418D19B37A97E988084F9F1D59DAD09 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
-		F9220633FF0734F71D10A73899D02557 /* LEGONetworking-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "LEGONetworking-dummy.m"; sourceTree = "<group>"; };
-		FE9D2AA2ACC7F93AD80B4AE6814E3B6A /* LEGONetworking.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = LEGONetworking.xcconfig; sourceTree = "<group>"; };
+		F55F2C43E36618F8F10421A4EE636A3E /* AFURLRequestSerialization.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = AFURLRequestSerialization.h; path = AFNetworking/AFURLRequestSerialization.h; sourceTree = "<group>"; };
+		F5C09B8B66809481321CF95F0C1F103F /* AFHTTPSessionManager.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = AFHTTPSessionManager.m; path = AFNetworking/AFHTTPSessionManager.m; sourceTree = "<group>"; };
+		FA78CF56AEDE5E5D44DB22E5BD0B54D6 /* NSString+LGMD5.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "NSString+LGMD5.h"; path = "LEGONetworking/Classes/NSString+LGMD5.h"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -154,20 +156,20 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		10B5ED4CEE3D388BC010715F1965D83E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A835812F32484004E07B05C8841C5E0A /* AFNetworking.framework in Frameworks */,
+				8BA3DD9595A7C3D4C424EF0732D342B0 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		30C47B48382711F2CD6DC1D44E104FBF /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				DEE7D42BA98EC220CFE9ED552BAEDBDE /* Foundation.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		37A89C46677CD29A0830C543208E5E00 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				E4B6EF59E06D0F7F805C1348019C5968 /* AFNetworking.framework in Frameworks */,
-				6C85C9295A13D8886C427CF73878E50C /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -195,18 +197,15 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		1E77FFC7398E59B41E4CBC909E2D64A7 /* Support Files */ = {
+		1A1A93D03CED1D0BB0393DD7BBE16F84 /* Serialization */ = {
 			isa = PBXGroup;
 			children = (
-				A253B39276ACA2BC9B68609F853C1981 /* AFNetworking.modulemap */,
-				94D59244161B6F974329A6366C329DED /* AFNetworking.xcconfig */,
-				1C3DE1F38A811CFDA48D248E9A027B16 /* AFNetworking-dummy.m */,
-				47FDCCAF8C065CDC0FA5B8BCF37AAF4D /* AFNetworking-Info.plist */,
-				5C46F854160C280B736FBFEF199C13FD /* AFNetworking-prefix.pch */,
-				AE049C0A9FD8C494E8D4ED9BA48747C2 /* AFNetworking-umbrella.h */,
+				F55F2C43E36618F8F10421A4EE636A3E /* AFURLRequestSerialization.h */,
+				0EDE43EA1C3E259B07187464E7D8EEB5 /* AFURLRequestSerialization.m */,
+				EA425EC79821418CC9BE542389DD123F /* AFURLResponseSerialization.h */,
+				75AD04D6D5917909DBCEF368709292D6 /* AFURLResponseSerialization.m */,
 			);
-			name = "Support Files";
-			path = "../Target Support Files/AFNetworking";
+			name = Serialization;
 			sourceTree = "<group>";
 		};
 		370A29F18B2AF209D0F84036FE9C8AC8 /* Pods-LEGONetworking_Example */ = {
@@ -229,27 +228,34 @@
 		38F198C508F1BF0159E872D6F39F7844 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				90F77CD5CAFB0AD77EB852180984E304 /* AFNetworking */,
+				55FC23BFDC035709F6520AE08E5AEFFB /* AFNetworking */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
 		};
-		40D908FA4B40D9C48E4C27AACE8AFE6F /* Security */ = {
+		4FD26A71A5D720B9AE64D183E51D7D7D /* NSURLSession */ = {
 			isa = PBXGroup;
 			children = (
-				D4B6E0868F4AD5FC12CEC4F65683D832 /* AFSecurityPolicy.h */,
-				C940A6C1B8F597B72149477E3C735207 /* AFSecurityPolicy.m */,
+				2CA53D56FA82346EBC8766ABA67CC9CA /* AFCompatibilityMacros.h */,
+				E0A7FDDE71B19AAAA6A2558CD8AC7C6F /* AFHTTPSessionManager.h */,
+				F5C09B8B66809481321CF95F0C1F103F /* AFHTTPSessionManager.m */,
+				DD53F204055D08EAF82E4912DFE7A407 /* AFURLSessionManager.h */,
+				ECD462B76101104B5E497CE967B6ACA8 /* AFURLSessionManager.m */,
 			);
-			name = Security;
+			name = NSURLSession;
 			sourceTree = "<group>";
 		};
-		554E7191F6BA408B86698BF65B4F228D /* Reachability */ = {
+		55FC23BFDC035709F6520AE08E5AEFFB /* AFNetworking */ = {
 			isa = PBXGroup;
 			children = (
-				50A112ADC3B021099D06F5C9881BFB89 /* AFNetworkReachabilityManager.h */,
-				7BA4992A3583EAA47B35C86FEAD2D18F /* AFNetworkReachabilityManager.m */,
+				4FD26A71A5D720B9AE64D183E51D7D7D /* NSURLSession */,
+				F4832AF119AAC278374BCA72EE62AD2B /* Reachability */,
+				BAA234718EC8DD3E52E89DD72BE7D494 /* Security */,
+				1A1A93D03CED1D0BB0393DD7BBE16F84 /* Serialization */,
+				D5FB963FD213DDD3CC63AE039BB64141 /* Support Files */,
 			);
-			name = Reachability;
+			name = AFNetworking;
+			path = AFNetworking;
 			sourceTree = "<group>";
 		};
 		6B33AB7E946EB28401392104ABCFF343 /* Pods-LEGONetworking_Tests */ = {
@@ -268,10 +274,10 @@
 			path = "Target Support Files/Pods-LEGONetworking_Tests";
 			sourceTree = "<group>";
 		};
-		83E250F565E9CF6BCC34D398754BD504 /* Development Pods */ = {
+		8489284468168C7E18EB3E73DE89413F /* Development Pods */ = {
 			isa = PBXGroup;
 			children = (
-				C45D12D8F03E674180F1152EF441BA60 /* LEGONetworking */,
+				8DCA551374634D9F1A2849298679AF07 /* LEGONetworking */,
 			);
 			name = "Development Pods";
 			sourceTree = "<group>";
@@ -285,93 +291,83 @@
 			name = "Targets Support Files";
 			sourceTree = "<group>";
 		};
-		90F77CD5CAFB0AD77EB852180984E304 /* AFNetworking */ = {
+		8DCA551374634D9F1A2849298679AF07 /* LEGONetworking */ = {
 			isa = PBXGroup;
 			children = (
-				C7BC9BC578EA48FBC5F61259966EE12E /* NSURLSession */,
-				554E7191F6BA408B86698BF65B4F228D /* Reachability */,
-				40D908FA4B40D9C48E4C27AACE8AFE6F /* Security */,
-				A0CDC0385B1EC242EF724291B8F775D8 /* Serialization */,
-				1E77FFC7398E59B41E4CBC909E2D64A7 /* Support Files */,
-			);
-			path = AFNetworking;
-			sourceTree = "<group>";
-		};
-		969B465B98F9661EB60BEE1047A4DA5D /* Pod */ = {
-			isa = PBXGroup;
-			children = (
-				A10E239C91F4E8EE36436D6A1785EBC8 /* LEGONetworking.podspec */,
-				7ADC3F71AA64DE9A4302F62C481CFBCB /* LICENSE */,
-				F418D19B37A97E988084F9F1D59DAD09 /* README.md */,
-			);
-			name = Pod;
-			sourceTree = "<group>";
-		};
-		A0CDC0385B1EC242EF724291B8F775D8 /* Serialization */ = {
-			isa = PBXGroup;
-			children = (
-				DE1EB0968251E0A09BE36CE1D3F3E8FA /* AFURLRequestSerialization.h */,
-				D7AE3156C2D065F5680472D13DB47283 /* AFURLRequestSerialization.m */,
-				6FBF5126ED6FF08007B3095358A469E8 /* AFURLResponseSerialization.h */,
-				D4831F6DEB1C67DA03F8398B3F2D371B /* AFURLResponseSerialization.m */,
-			);
-			name = Serialization;
-			sourceTree = "<group>";
-		};
-		A7DDDDE3CB2B441F392858F8BA2D57A6 /* Support Files */ = {
-			isa = PBXGroup;
-			children = (
-				BACDCA042D80286743766573FE6DE79F /* LEGONetworking.modulemap */,
-				FE9D2AA2ACC7F93AD80B4AE6814E3B6A /* LEGONetworking.xcconfig */,
-				F9220633FF0734F71D10A73899D02557 /* LEGONetworking-dummy.m */,
-				C3E22D797882CFA7990EF1756E92F4A4 /* LEGONetworking-Info.plist */,
-				BEE08B05F974401407A46A992801793D /* LEGONetworking-prefix.pch */,
-				9D5D1877B4D194303EDBB81B8AB37BFA /* LEGONetworking-umbrella.h */,
-			);
-			name = "Support Files";
-			path = "Example/Pods/Target Support Files/LEGONetworking";
-			sourceTree = "<group>";
-		};
-		C45D12D8F03E674180F1152EF441BA60 /* LEGONetworking */ = {
-			isa = PBXGroup;
-			children = (
-				0A4738E9E70C3EB87513F37C3B346E15 /* LEGONetworking.h */,
-				213E818AD15DF691BCA81F2B8B1770F1 /* LEGONetworking.m */,
-				4B244E8056997A458F3A382F1F42B64F /* LEGOTokenManager.h */,
-				648A2E136BAED663F3393EF347209BB7 /* LEGOTokenManager.m */,
-				8008506E9CADBD90DD18393BC0E5E5A2 /* NSString+LGMD5.h */,
-				353CAFA048C405E53FB37C2FF44DA660 /* NSString+LGMD5.m */,
-				E89A60C8247CC3FA00FD1503 /* LEGOInterceptor.h */,
-				E89A60C9247CC3FA00FD1503 /* LEGOInterceptor.m */,
-				969B465B98F9661EB60BEE1047A4DA5D /* Pod */,
-				A7DDDDE3CB2B441F392858F8BA2D57A6 /* Support Files */,
+				5790304A9784A4AC7DBDF931826223AA /* LEGOInterceptor.h */,
+				1280C4BE30996F5E5CC527D160938105 /* LEGOInterceptor.m */,
+				94E6DAC38FA71DC30ADFD4DC2C3D017A /* LEGONetworking.h */,
+				7CAFBA6E619F7EE1341AB2D709AAD5A4 /* LEGONetworking.m */,
+				99F889494659914B703D41F5AEA4106A /* LEGOTokenManager.h */,
+				9321B01D7C9012020541A933E0866A0D /* LEGOTokenManager.m */,
+				FA78CF56AEDE5E5D44DB22E5BD0B54D6 /* NSString+LGMD5.h */,
+				49F8B13E6DFFBD2C845DB5E52819225F /* NSString+LGMD5.m */,
+				AC9572E5E7F3E976D51EE177D2CE919B /* Pod */,
+				D5048DBA2360D782605632C0569279CA /* Support Files */,
 			);
 			name = LEGONetworking;
 			path = ../..;
 			sourceTree = "<group>";
 		};
-		C7BC9BC578EA48FBC5F61259966EE12E /* NSURLSession */ = {
+		AC9572E5E7F3E976D51EE177D2CE919B /* Pod */ = {
 			isa = PBXGroup;
 			children = (
-				7AEA682DC29B00F884967A9AD2AEC122 /* AFCompatibilityMacros.h */,
-				9AB5F6C5B4B0F965DE031DEDC16D2CA5 /* AFHTTPSessionManager.h */,
-				B908096D71028626D6F9DC7718C819C3 /* AFHTTPSessionManager.m */,
-				6AB65BAF4756919E2F981536297368A3 /* AFURLSessionManager.h */,
-				6C4B28A685B23249AF311C52D5CE73D7 /* AFURLSessionManager.m */,
+				08BD7F6C075B6988BC23D524BBEBB54E /* LEGONetworking.podspec */,
+				8A711625BDA37D4C89879948B38FF716 /* LICENSE */,
+				E52BC47D6A6A42AC02432A6857D94D39 /* README.md */,
 			);
-			name = NSURLSession;
+			name = Pod;
+			sourceTree = "<group>";
+		};
+		BAA234718EC8DD3E52E89DD72BE7D494 /* Security */ = {
+			isa = PBXGroup;
+			children = (
+				E70FC5E2BB3160C1C80B1F2DB423270B /* AFSecurityPolicy.h */,
+				1B3CD44F4AD1715B3E04D04C55CF4C3B /* AFSecurityPolicy.m */,
+			);
+			name = Security;
 			sourceTree = "<group>";
 		};
 		CF1408CF629C7361332E53B88F7BD30C = {
 			isa = PBXGroup;
 			children = (
 				9D940727FF8FB9C785EB98E56350EF41 /* Podfile */,
-				83E250F565E9CF6BCC34D398754BD504 /* Development Pods */,
+				8489284468168C7E18EB3E73DE89413F /* Development Pods */,
 				077E62C8697DE97346193B6F7D0CA384 /* Frameworks */,
 				38F198C508F1BF0159E872D6F39F7844 /* Pods */,
 				E45BB7C648053B59C87FBCA7BEDE31A0 /* Products */,
 				8BFEA561B9316CB4E7470D6E53B7DEC4 /* Targets Support Files */,
 			);
+			sourceTree = "<group>";
+		};
+		D5048DBA2360D782605632C0569279CA /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				0B907A3A9A95A2D8D367B611FE4D859C /* LEGONetworking.modulemap */,
+				12BFE83334B65F781B71E6FC5A1269BC /* LEGONetworking-dummy.m */,
+				210E4DFA3042D0510CB899989BA01E3D /* LEGONetworking-Info.plist */,
+				E6AB53F092505B34415E75730FF770E4 /* LEGONetworking-prefix.pch */,
+				5DF7D395D21A14C1F21DBE1EDA988209 /* LEGONetworking-umbrella.h */,
+				6CF4123E4F0F829EDD4935C75AAB4693 /* LEGONetworking.debug.xcconfig */,
+				A54B74EB06065EE61DC9DD5E88E68E76 /* LEGONetworking.release.xcconfig */,
+			);
+			name = "Support Files";
+			path = "Example/Pods/Target Support Files/LEGONetworking";
+			sourceTree = "<group>";
+		};
+		D5FB963FD213DDD3CC63AE039BB64141 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				B52743ECF53428C018D7D8BE92C10A94 /* AFNetworking.modulemap */,
+				2E37EDCC63B00E8FDAD49805695E817B /* AFNetworking-dummy.m */,
+				64C891789EBCF764DC50BCD7D18A5328 /* AFNetworking-Info.plist */,
+				7F76163B3FFB43D9760073E08B72B13C /* AFNetworking-prefix.pch */,
+				08464A244E2874952F92BCCCA8E768F7 /* AFNetworking-umbrella.h */,
+				4BA96B432304B0894579CFAF93268317 /* AFNetworking.debug.xcconfig */,
+				DD1A40B148DA4B94648C4C2985D43C38 /* AFNetworking.release.xcconfig */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/AFNetworking";
 			sourceTree = "<group>";
 		};
 		E45BB7C648053B59C87FBCA7BEDE31A0 /* Products */ = {
@@ -383,6 +379,15 @@
 				394AF0A01FF6DA896FEE32B3EA368C97 /* Pods_LEGONetworking_Tests.framework */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		F4832AF119AAC278374BCA72EE62AD2B /* Reachability */ = {
+			isa = PBXGroup;
+			children = (
+				D79C7C927F36F700D76C4A3230DF1062 /* AFNetworkReachabilityManager.h */,
+				823767B82E98733458EB3FB18A3041CD /* AFNetworkReachabilityManager.m */,
+			);
+			name = Reachability;
 			sourceTree = "<group>";
 		};
 		FB8FCD97712E84420776F9855D62CA59 /* iOS */ = {
@@ -416,14 +421,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		9D04143DE865A4D0C252A82DD73F4EFC /* Headers */ = {
+		F0CDE25304F7069F7C7BCB4C96665134 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				94DD1A0D27D1CDBCE6656B3AE3026368 /* LEGONetworking-umbrella.h in Headers */,
-				7548852A3A66AF5005A218ACA236E8BB /* LEGONetworking.h in Headers */,
-				4DEEEB965FFB020183C0BF14C1C661BD /* LEGOTokenManager.h in Headers */,
-				CE5AB3DDD904217DABD585BF685C3D20 /* NSString+LGMD5.h in Headers */,
+				128E33880F990EA7408F4E4781A201C5 /* LEGOInterceptor.h in Headers */,
+				A2B52CC6E9F45C1969A55E4252E3182A /* LEGONetworking-umbrella.h in Headers */,
+				986A9B56FD219EBD43A5B9E10D223CBA /* LEGONetworking.h in Headers */,
+				C1202B2B4915A5449E12DD676A30C325 /* LEGOTokenManager.h in Headers */,
+				9414C0D4FA6D15A968AAFC50637C95EB /* NSString+LGMD5.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -432,7 +438,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				902D3AC77A4A0EC157689DE43D067594 /* AFCompatibilityMacros.h in Headers */,
-				E89A60CA247CC3FA00FD1503 /* LEGOInterceptor.h in Headers */,
 				2606153E172A2589B093226B741CE334 /* AFHTTPSessionManager.h in Headers */,
 				D7D25B5722CE584AA6169CA5B9731854 /* AFNetworking-umbrella.h in Headers */,
 				A2067385E34E2BF10E2DEF909C4AAE04 /* AFNetworkReachabilityManager.h in Headers */,
@@ -485,17 +490,17 @@
 		};
 		B6FE4866ABCABB97723074015E192BBA /* LEGONetworking */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = F15034452B91B863270FB6AC5D607C04 /* Build configuration list for PBXNativeTarget "LEGONetworking" */;
+			buildConfigurationList = 336626CA4C34987A08B2D83FAEFF1A47 /* Build configuration list for PBXNativeTarget "LEGONetworking" */;
 			buildPhases = (
-				9D04143DE865A4D0C252A82DD73F4EFC /* Headers */,
-				0907AEBDE35B3035E785E9DDB94F47BB /* Sources */,
-				37A89C46677CD29A0830C543208E5E00 /* Frameworks */,
-				23EB7F531A61D4DDB096714BCAD1F17B /* Resources */,
+				F0CDE25304F7069F7C7BCB4C96665134 /* Headers */,
+				9F9DEA048C0D94286E846123126EE848 /* Sources */,
+				10B5ED4CEE3D388BC010715F1965D83E /* Frameworks */,
+				49A5EB5831581222792DCBBF4F2180B9 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				B72A76BB0AE3D63D2015B2353842B98C /* PBXTargetDependency */,
+				0CD4F2C3192CA0F696CC80DD8CDFD697 /* PBXTargetDependency */,
 			);
 			name = LEGONetworking;
 			productName = LEGONetworking;
@@ -537,6 +542,7 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				Base,
 			);
 			mainGroup = CF1408CF629C7361332E53B88F7BD30C;
 			productRefGroup = E45BB7C648053B59C87FBCA7BEDE31A0 /* Products */;
@@ -552,7 +558,7 @@
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		23EB7F531A61D4DDB096714BCAD1F17B /* Resources */ = {
+		49A5EB5831581222792DCBBF4F2180B9 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -583,29 +589,29 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		0907AEBDE35B3035E785E9DDB94F47BB /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				7EED2598C9687C4B5E8DAC2BDBEDB80F /* LEGONetworking-dummy.m in Sources */,
-				B6FBA27BA61E7705A420F66ECF21D22A /* LEGONetworking.m in Sources */,
-				305324788E685264849641C7AA289839 /* LEGOTokenManager.m in Sources */,
-				D38408CE9900FC8BEB4623735CED9FDC /* NSString+LGMD5.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		973E11D1C1EB2361F9F340B740A6C5B3 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				E06389FE80CBFAE6CCF395163845965B /* AFHTTPSessionManager.m in Sources */,
 				66DBC25CE50D0E67F015AF878D51512B /* AFNetworking-dummy.m in Sources */,
-				E89A60CB247CC3FA00FD1503 /* LEGOInterceptor.m in Sources */,
 				F4D969EE3C3BB7765EB3A02CA8759BE0 /* AFNetworkReachabilityManager.m in Sources */,
 				252C9BD279B53A5D6A5074D4BC1E9CC5 /* AFSecurityPolicy.m in Sources */,
 				004E949DF07AE7B4A83FA37F94F9E3A7 /* AFURLRequestSerialization.m in Sources */,
 				66589771977CB13B36E51766DF20CB97 /* AFURLResponseSerialization.m in Sources */,
 				FE795EDCFA8A9712C7CEF3421A8B7823 /* AFURLSessionManager.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9F9DEA048C0D94286E846123126EE848 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0824379B6D0092B0F8BD9B75A7044D70 /* LEGOInterceptor.m in Sources */,
+				9AB72DD1C86A618DF8402DAC1E136746 /* LEGONetworking-dummy.m in Sources */,
+				0C99599F2EA164E486752C4C00BB4595 /* LEGONetworking.m in Sources */,
+				4E6E5FFBDE9A775ED1AEA57DC605223B /* LEGOTokenManager.m in Sources */,
+				C81C1D446BF4D25ABEEA8517F6904FAB /* NSString+LGMD5.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -634,17 +640,17 @@
 			target = 0130B3724283586C0E9D2A112D4F2AA1 /* AFNetworking */;
 			targetProxy = 2421E5CB81C77B1989E889B03B71601B /* PBXContainerItemProxy */;
 		};
+		0CD4F2C3192CA0F696CC80DD8CDFD697 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = AFNetworking;
+			target = 0130B3724283586C0E9D2A112D4F2AA1 /* AFNetworking */;
+			targetProxy = FAB79ECC5B7C87B243A4BA3703CE695A /* PBXContainerItemProxy */;
+		};
 		83FD390FFFC76D2FF113C735C2014C54 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = LEGONetworking;
 			target = B6FE4866ABCABB97723074015E192BBA /* LEGONetworking */;
 			targetProxy = FFDA5808220FA9894AA8A5260A8C94D6 /* PBXContainerItemProxy */;
-		};
-		B72A76BB0AE3D63D2015B2353842B98C /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = AFNetworking;
-			target = 0130B3724283586C0E9D2A112D4F2AA1 /* AFNetworking */;
-			targetProxy = 418B99C42AEED8C92ADD3808F80A8392 /* PBXContainerItemProxy */;
 		};
 		C8AFEF4F794019D1F9F85ED1EFE5313D /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -655,36 +661,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		0259E6D1102F21992B3DBE59C013D5E1 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 94D59244161B6F974329A6366C329DED /* AFNetworking.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/AFNetworking/AFNetworking-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/AFNetworking/AFNetworking-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/AFNetworking/AFNetworking.modulemap";
-				PRODUCT_MODULE_NAME = AFNetworking;
-				PRODUCT_NAME = AFNetworking;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
 		18EBC0178A9FEE4C0C838D8F141A9DDE /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = EF915A8A6E6F5A0B9CD7F850AFBD2026 /* Pods-LEGONetworking_Example.debug.xcconfig */;
@@ -718,9 +694,9 @@
 			};
 			name = Debug;
 		};
-		34CA309E97E96B655100C3E050E2AE5C /* Debug */ = {
+		23FA18E27C7E662B72CA7A05B1EB95D1 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = FE9D2AA2ACC7F93AD80B4AE6814E3B6A /* LEGONetworking.xcconfig */;
+			baseConfigurationReference = 4BA96B432304B0894579CFAF93268317 /* AFNetworking.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
@@ -731,14 +707,14 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/LEGONetworking/LEGONetworking-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/LEGONetworking/LEGONetworking-Info.plist";
+				GCC_PREFIX_HEADER = "Target Support Files/AFNetworking/AFNetworking-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/AFNetworking/AFNetworking-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/LEGONetworking/LEGONetworking.modulemap";
-				PRODUCT_MODULE_NAME = LEGONetworking;
-				PRODUCT_NAME = LEGONetworking;
+				MODULEMAP_FILE = "Target Support Files/AFNetworking/AFNetworking.modulemap";
+				PRODUCT_MODULE_NAME = AFNetworking;
+				PRODUCT_NAME = AFNetworking;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
@@ -835,7 +811,8 @@
 				MTL_FAST_MATH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRIP_INSTALLED_PRODUCT = NO;
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
 				SYMROOT = "${SRCROOT}/../build";
 			};
@@ -905,9 +882,9 @@
 			};
 			name = Debug;
 		};
-		A6881F0EF64F429E5102EA3906B6669B /* Release */ = {
+		9C0483FAF252D53E3AF374321CAE0E3E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 94D59244161B6F974329A6366C329DED /* AFNetworking.xcconfig */;
+			baseConfigurationReference = DD1A40B148DA4B94648C4C2985D43C38 /* AFNetworking.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
@@ -1003,9 +980,39 @@
 			};
 			name = Release;
 		};
-		F069E3EB21BF7ECE01A91028CD0F9143 /* Release */ = {
+		D474F6E516B8C4E84E997016D6E396F6 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = FE9D2AA2ACC7F93AD80B4AE6814E3B6A /* LEGONetworking.xcconfig */;
+			baseConfigurationReference = 6CF4123E4F0F829EDD4935C75AAB4693 /* LEGONetworking.debug.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/LEGONetworking/LEGONetworking-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/LEGONetworking/LEGONetworking-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/LEGONetworking/LEGONetworking.modulemap";
+				PRODUCT_MODULE_NAME = LEGONetworking;
+				PRODUCT_NAME = LEGONetworking;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		EF91F9371C4C663ADCA4EC102316A0BC /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = A54B74EB06065EE61DC9DD5E88E68E76 /* LEGONetworking.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
@@ -1037,6 +1044,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		336626CA4C34987A08B2D83FAEFF1A47 /* Build configuration list for PBXNativeTarget "LEGONetworking" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D474F6E516B8C4E84E997016D6E396F6 /* Debug */,
+				EF91F9371C4C663ADCA4EC102316A0BC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		4821239608C13582E20E6DA73FD5F1F9 /* Build configuration list for PBXProject "Pods" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -1049,8 +1065,8 @@
 		7AFDF6F0920DEA920A66453151617A5D /* Build configuration list for PBXNativeTarget "AFNetworking" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				0259E6D1102F21992B3DBE59C013D5E1 /* Debug */,
-				A6881F0EF64F429E5102EA3906B6669B /* Release */,
+				23FA18E27C7E662B72CA7A05B1EB95D1 /* Debug */,
+				9C0483FAF252D53E3AF374321CAE0E3E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -1060,15 +1076,6 @@
 			buildConfigurations = (
 				18EBC0178A9FEE4C0C838D8F141A9DDE /* Debug */,
 				47B6F00532680871E380D91F5193C105 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		F15034452B91B863270FB6AC5D607C04 /* Build configuration list for PBXNativeTarget "LEGONetworking" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				34CA309E97E96B655100C3E050E2AE5C /* Debug */,
-				F069E3EB21BF7ECE01A91028CD0F9143 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

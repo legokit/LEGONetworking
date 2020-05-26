@@ -371,7 +371,7 @@ static NSDictionary *legoHttpHeaders = nil;
     __block NSURLSessionUploadTask *task = [manager uploadTaskWithStreamedRequest:request progress:progress completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
         dispatch_async(dispatch_get_main_queue(), ^{
             if (!error) {
-                [self.class successResponse:responseObject task:task success:success fail:fail];
+                [self.class successResponse:responseObject manager:manager task:task success:success fail:fail];
                 [[self allTasks] removeObject:task];
                 if ([self isDebug]) {
                     NSInteger httpMethodInt = [httpMethod isEqualToString:@"get"] ? 1 : 2;
