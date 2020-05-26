@@ -24,7 +24,8 @@ typedef NS_ENUM(NSInteger,LEGORespondStatusCode) {
     LEGORespondStatusCodeNeedLogin = 2002,    // 接口需要登录，请登录后重试
     LBRespondStatusCodeFailCancel = 2003,    // 请求取消
     LBRespondStatusCodeFailTimedOut = 2004,    // 请求超时
-    LBRespondStatusCodeUnReadable = 2005  // 消息不可读
+    LBRespondStatusCodeUnReadable = 2005,  // 消息不可读
+    LBRespondStatusCodeInterceptor = 2006  // 本地拦截
 };
 
 typedef NS_ENUM(NSInteger, LEGONetworkStatus) {
@@ -43,6 +44,11 @@ typedef NS_ENUM(NSUInteger, LEGOResponseType) {
     kLEGOResponseTypeJSON = 1,    // json 默认
     kLEGOResponseTypeXML  = 2,    // XML
     kLEGOResponseTypeData = 3    // data
+};
+
+typedef NS_ENUM(NSUInteger, LEGOHttpMethodType) {
+    LEGOHttpMethodTypeGet = 1,    // get
+    LEGOHttpMethodTypePost  = 2,    // post
 };
 
 /** 下载进度，已下载的大小，文件总大小 */
@@ -184,7 +190,7 @@ typedef void (^LEGOUploadProgress)(int64_t bytesWritten, int64_t totalBytesWritt
 @return LEGOURLSessionTask
 */
 + (LEGOURLSessionTask *)requestWithUrl:(NSString *)url
-                             httpMedth:(NSUInteger)httpMethod
+                             httpMedth:(LEGOHttpMethodType)httpMethod
                            httpsHeader:(NSDictionary *)httpsHeader
                                 params:(NSDictionary *)params
                            requestType:(LEGORequestType)requestType

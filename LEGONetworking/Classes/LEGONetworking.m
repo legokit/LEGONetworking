@@ -9,6 +9,7 @@
 #import "LEGONetworking.h"
 #import <AFNetworking/AFHTTPSessionManager.h>
 #import "NSString+LGMD5.h"
+#import "LEGOInterceptor.h"
 
 #ifdef DEBUG
 #define LEGONetWorkingLog(s, ... ) NSLog( @"%@",[NSString stringWithFormat:(s), ##__VA_ARGS__] )
@@ -156,7 +157,7 @@ static NSDictionary *legoHttpHeaders = nil;
                           progress:(LEGODownloadProgress)progress
                            success:(LEGOResponseSuccess)success
                               fail:(LEGOResponseFailure)fail {
-    return [self.class getWithUrl:url params:params progress:progress responseType:kLEGOResponseTypeJSON success:success fail:fail];
+    return [self.class getWithUrl:url params:params progress:progress responseType:kLEGOResponseTypeData success:success fail:fail];
 }
 
 + (LEGOURLSessionTask *)getWithUrl:(NSString *)url
@@ -192,7 +193,7 @@ static NSDictionary *legoHttpHeaders = nil;
                            progress:(LEGODownloadProgress)progress
                             success:(LEGOResponseSuccess)success
                                fail:(LEGOResponseFailure)fail {
-    return [self.class postWithUrl:url params:params progress:progress responseType:kLEGOResponseTypeJSON success:success fail:fail];
+    return [self.class postWithUrl:url params:params progress:progress responseType:kLEGOResponseTypeData success:success fail:fail];
 }
 
 + (LEGOURLSessionTask *)postWithUrl:(NSString *)url
@@ -213,7 +214,7 @@ static NSDictionary *legoHttpHeaders = nil;
 }
 
 + (LEGOURLSessionTask *)requestWithUrl:(NSString *)url
-                             httpMedth:(NSUInteger)httpMethod
+                             httpMedth:(LEGOHttpMethodType)httpMethod
                            httpsHeader:(NSDictionary *)httpsHeader
                                 params:(NSDictionary *)params
                            requestType:(LEGORequestType)requestType
@@ -272,13 +273,12 @@ static NSDictionary *legoHttpHeaders = nil;
     dispatch_async(dispatch_get_main_queue(), ^{
         [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     });
-    if (1 == httpMethod) {
+    if (LEGOHttpMethodTypeGet == httpMethod) {
         session = [manager GET:url parameters:params progress:^(NSProgress * _Nonnull downloadProgress) {
             if (progress) {
                 progress(downloadProgress.completedUnitCount, downloadProgress.totalUnitCount);
             }
         } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-            [self successResponse:responseObject task:task success:success fail:fail];
             [[self allTasks] removeObject:task];
             if ([self isDebug]) {
                 [self logWithSuccessResponse:responseObject
@@ -286,20 +286,21 @@ static NSDictionary *legoHttpHeaders = nil;
                                       params:params
                                   httpMethod:httpMethod];
             }
+            [self successResponse:responseObject manager:manager task:task success:success fail:fail];
+
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
             [[self allTasks] removeObject:task];
-            [self handleCallbackWithError:error task:task fail:fail];
             if ([self isDebug]) {
                 [self logWithFailError:error url:url params:params httpMethod:httpMethod];
             }
+            [self handleCallbackWithError:error task:task fail:fail];
         }];
-    } else if (2 == httpMethod) {
+    } else if (LEGOHttpMethodTypePost == httpMethod) {
         session = [manager POST:url parameters:params progress:^(NSProgress * _Nonnull downloadProgress) {
             if (progress) {
                 progress(downloadProgress.completedUnitCount, downloadProgress.totalUnitCount);
             }
         } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-            [self successResponse:responseObject task:task success:success fail:fail];
             [[self allTasks] removeObject:task];
             if ([self isDebug]) {
                 [self logWithSuccessResponse:responseObject
@@ -307,13 +308,14 @@ static NSDictionary *legoHttpHeaders = nil;
                                       params:params
                                   httpMethod:httpMethod];
             }
+            [self successResponse:responseObject manager:manager task:task success:success fail:fail];
+
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-            NSLog(@"token=%@",[LEGOTokenManager sharedManager].token);
             [[self allTasks] removeObject:task];
-            [self handleCallbackWithError:error task:task fail:fail];
             if ([self isDebug]) {
                 [self logWithFailError:error url:url params:params httpMethod:httpMethod];
             }
+            [self handleCallbackWithError:error task:task fail:fail];
         }];
     }
     if (session) {
@@ -417,7 +419,7 @@ static NSDictionary *legoHttpHeaders = nil;
 }
 
 #pragma mark - 请求回调成功、失败
-+ (void)successResponse:(id)responseData task:(NSURLSessionDataTask *)task success:(LEGOResponseSuccess)success fail:(LEGOResponseFailure)fail {
++ (void)successResponse:(id)responseData manager:(AFHTTPSessionManager *)manager task:(NSURLSessionDataTask *)task success:(LEGOResponseSuccess)success fail:(LEGOResponseFailure)fail {
     dispatch_async(dispatch_get_main_queue(), ^{
         [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
     });
@@ -425,7 +427,17 @@ static NSDictionary *legoHttpHeaders = nil;
     LEGOResponse *response = [[LEGOResponse alloc] init];
     response.data = data;
     response.task = task;
-    
+
+    if ([LEGOInterceptor sharedManager].interceptor && [manager.responseSerializer isKindOfClass:[AFHTTPResponseSerializer class]] && [responseData isKindOfClass:[NSData class]]) {
+        BOOL isPass = [LEGOInterceptor sharedManager].interceptor(responseData,response);
+        if (!isPass) {
+            if (fail) {
+                response.code = LBRespondStatusCodeInterceptor;
+                fail(response);
+            }
+            return;
+        }
+    }
     if (success) {
         success(response);
     }
