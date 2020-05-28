@@ -110,13 +110,18 @@ static NSDictionary *legoHttpHeaders = nil;
     return legoHttpSessionManager;
 }
 
-+ (void)setDefaultHttpsHeader:(AFHTTPSessionManager *)manager {
++ (NSDictionary *)getDefaultHttpsHeader {
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
     if (legoHttpHeaders && [legoHttpHeaders isKindOfClass:[NSDictionary class]]) {
         [legoHttpHeaders enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
-            [manager.requestSerializer setValue:obj forHTTPHeaderField:key];
+            [dic setObject:obj forKey:key];
         }];
     }
-    [manager.requestSerializer setValue:[LEGOTokenManager sharedManager].token forHTTPHeaderField:[LEGOTokenManager sharedManager].httpHeadKey];
+    NSString *token = [LEGOTokenManager sharedManager].token;
+    if (token && token.length) {
+        [dic setObject:token forKey:[LEGOTokenManager sharedManager].httpHeadKey];
+    }
+    return dic;
 }
 
 + (BOOL)shouldEncode {
@@ -242,15 +247,13 @@ static NSDictionary *legoHttpHeaders = nil;
                break;
            }
     }
-    if (httpsHeader && [httpsHeader isKindOfClass:[NSDictionary class]]) {
-        [httpsHeader enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
-            [manager.requestSerializer setValue:obj forHTTPHeaderField:key];
-        }];
+    
+    if (!httpsHeader || ![httpsHeader isKindOfClass:[NSDictionary class]]) {
+        httpsHeader = [self.class getDefaultHttpsHeader];
     }
-    else {
-        [self.class setDefaultHttpsHeader:manager];
-    }
-
+    [httpsHeader enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
+        [manager.requestSerializer setValue:obj forHTTPHeaderField:key];
+    }];
     LEGOURLSessionTask *session = nil;
     dispatch_async(dispatch_get_main_queue(), ^{
         [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
@@ -262,11 +265,11 @@ static NSDictionary *legoHttpHeaders = nil;
             }
         } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
             [[self allTasks] removeObject:task];
-            [self successResponse:responseObject manager:manager task:task success:success fail:fail];
+            [self successResponse:responseObject manager:manager task:task url:url httpsHead:httpsHeader params:params httpMethod:httpMethod success:success fail:fail];
 
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
             [[self allTasks] removeObject:task];
-            [self handleCallbackWithError:error task:task url:url params:params httpMethod:httpMethod fail:fail];
+            [self handleCallbackWithError:error task:task url:url httpsHead:httpsHeader params:params httpMethod:httpMethod fail:fail];
         }];
     } else if (LEGOHttpMethodTypePost == httpMethod) {
         session = [manager POST:url parameters:params progress:^(NSProgress * _Nonnull downloadProgress) {
@@ -275,11 +278,11 @@ static NSDictionary *legoHttpHeaders = nil;
             }
         } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
             [[self allTasks] removeObject:task];
-            [self successResponse:responseObject manager:manager task:task success:success fail:fail];
+            [self successResponse:responseObject manager:manager task:task url:url httpsHead:httpsHeader params:params httpMethod:httpMethod success:success fail:fail];
 
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
             [[self allTasks] removeObject:task];
-            [self handleCallbackWithError:error task:task url:url params:params httpMethod:httpMethod fail:fail];
+            [self handleCallbackWithError:error task:task url:url httpsHead:httpsHeader params:params httpMethod:httpMethod fail:fail];
         }];
     }
     if (session) {
@@ -336,12 +339,12 @@ static NSDictionary *legoHttpHeaders = nil;
     __block NSURLSessionUploadTask *task = [manager uploadTaskWithStreamedRequest:request progress:progress completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
         dispatch_async(dispatch_get_main_queue(), ^{
             if (!error) {
-                [self.class successResponse:responseObject manager:nil task:task success:success fail:fail];
+                [self.class successResponse:responseObject manager:nil task:task url:url httpsHead:httpsHeader params:params httpMethod:(int)httpMethod success:success fail:fail];
                 [[self allTasks] removeObject:task];
             }
             else {
                 [[self allTasks] removeObject:task];
-                [self handleCallbackWithError:error task:task url:url params:params httpMethod:(int)httpMethod fail:fail];
+                [self handleCallbackWithError:error task:task url:url httpsHead:httpsHeader params:params httpMethod:(int)httpMethod fail:fail];
             }
         });
     }];
@@ -373,7 +376,7 @@ static NSDictionary *legoHttpHeaders = nil;
 }
 
 #pragma mark - 请求回调成功、失败
-+ (void)successResponse:(id)responseData manager:(AFHTTPSessionManager *)manager task:(NSURLSessionDataTask *)task success:(LEGOResponseSuccess)success fail:(LEGOResponseFailure)fail {
++ (void)successResponse:(id)responseData manager:(AFHTTPSessionManager *)manager task:(NSURLSessionDataTask *)task url:(NSString *)url httpsHead:(NSDictionary *)httpsHead params:(NSDictionary *)params httpMethod:(LEGOHttpMethodType)httpMethod success:(LEGOResponseSuccess)success fail:(LEGOResponseFailure)fail {
     dispatch_async(dispatch_get_main_queue(), ^{
         [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
     });
@@ -386,7 +389,7 @@ static NSDictionary *legoHttpHeaders = nil;
     NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)urlResponse;
     response.statusCode = httpResponse.statusCode;
     if ([LEGOInterceptor sharedManager].sucessInterceptor) {
-        BOOL isPass = [LEGOInterceptor sharedManager].sucessInterceptor(responseData, response);
+        BOOL isPass = [LEGOInterceptor sharedManager].sucessInterceptor(responseData, response, url,httpsHead,params,httpMethod);
         if (!isPass) {
             if (fail) {
                 response.code = LBRespondStatusCodeInterceptor;
@@ -400,7 +403,7 @@ static NSDictionary *legoHttpHeaders = nil;
     }
 }
 
-+ (void)handleCallbackWithError:(NSError *)error task:(NSURLSessionDataTask *)task url:(NSString *)url params:(NSDictionary *)params httpMethod:(LEGOHttpMethodType)httpMethod fail:(LEGOResponseFailure)fail {
++ (void)handleCallbackWithError:(NSError *)error task:(NSURLSessionDataTask *)task url:(NSString *)url httpsHead:(NSDictionary *)httpsHead params:(NSDictionary *)params httpMethod:(LEGOHttpMethodType)httpMethod fail:(LEGOResponseFailure)fail {
     NSData *data = (NSData *)error.userInfo[AFNetworkingOperationFailingURLResponseDataErrorKey];
     NSString *message = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
     dispatch_async(dispatch_get_main_queue(), ^{
@@ -434,7 +437,7 @@ static NSDictionary *legoHttpHeaders = nil;
     response.statusCode = httpResponse.statusCode;
     
     if ([LEGOInterceptor sharedManager].failInterceptor) {
-        [LEGOInterceptor sharedManager].failInterceptor(data, response, url, params, httpMethod);
+        [LEGOInterceptor sharedManager].failInterceptor(data, response, url, httpsHead, params, httpMethod);
     }
     if (fail) {
         fail(response);
