@@ -291,6 +291,108 @@ static NSDictionary *legoHttpHeaders = nil;
     return session;
 }
 
++ (LEGOURLSessionTask *)requestWithUrl:(NSString *)url
+                             httpMedth:(LEGOHttpMethodType)httpMethod
+                           httpsHeader:(NSDictionary *)httpsHeader
+                            paramsData:(NSData *)paramsData
+                           requestType:(LEGORequestType)requestType
+                          responseType:(LEGOResponseType)responseType
+                               success:(LEGOResponseSuccess)success
+                                  fail:(LEGOResponseFailure)fail {
+
+    if ([self.class shouldEncode]) {
+        url = [self encodeUrl:url];
+    }
+    if (![NSURL URLWithString:url]) {
+        NSLog(@"URLString无效，无法生成URL。可能是URL中有中文，请尝试Encode URL");
+        return nil;
+    }
+    AFHTTPSessionManager *manager = [self manager];
+    switch (requestType) {
+        case kLEGORequestTypeJSON: {
+            manager.requestSerializer = [AFJSONRequestSerializer serializer];
+            break;
+        }
+        case kLEGORequestTypePlainText: {
+            manager.requestSerializer = [AFHTTPRequestSerializer serializer];
+            break;
+        }
+        default: {
+            break;
+        }
+    }
+    switch (responseType) {
+           case kLEGOResponseTypeJSON: {
+               manager.responseSerializer = [AFJSONResponseSerializer serializer];
+               break;
+           }
+           case kLEGOResponseTypeXML: {
+               manager.responseSerializer = [AFXMLParserResponseSerializer serializer];
+               break;
+           }
+           case kLEGOResponseTypeData: {
+               manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+               break;
+           }
+           default: {
+               break;
+           }
+    }
+    
+    if (!httpsHeader || ![httpsHeader isKindOfClass:[NSDictionary class]]) {
+        httpsHeader = [self.class getDefaultHttpsHeader];
+    }
+    __block NSURLSessionDataTask *session = nil;
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+    });
+    if (LEGOHttpMethodTypeGet == httpMethod) {
+        NSMutableURLRequest *request = [[AFHTTPRequestSerializer serializer] requestWithMethod:@"GET" URLString:url parameters:nil error:nil];
+        [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+        [request setValue:@"application/json" forHTTPHeaderField:@"Accept"];
+        [httpsHeader enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
+            [request setValue:obj forHTTPHeaderField:key];
+        }];
+        [request setHTTPBody:paramsData];
+        session = [manager dataTaskWithRequest:request uploadProgress:nil downloadProgress:nil completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
+            if (!error) {
+                [[self allTasks] removeObject:session];
+                NSDictionary *params = [NSJSONSerialization JSONObjectWithData:paramsData options:kNilOptions error:nil];
+                [self successResponse:responseObject manager:manager task:session url:url httpsHead:httpsHeader params:params httpMethod:httpMethod success:success fail:fail];
+            }
+            else {
+                [[self allTasks] removeObject:session];
+                NSDictionary *params = [NSJSONSerialization JSONObjectWithData:paramsData options:kNilOptions error:nil];
+                [self handleCallbackWithError:error task:session url:url httpsHead:httpsHeader params:params httpMethod:httpMethod fail:fail];
+            }
+        }];
+        [session resume];
+    }
+    else if (LEGOHttpMethodTypePost == httpMethod) {
+        NSMutableURLRequest *request = [[AFHTTPRequestSerializer serializer] requestWithMethod:@"POST" URLString:url parameters:nil error:nil];
+        [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+        [request setValue:@"application/json" forHTTPHeaderField:@"Accept"];
+        [httpsHeader enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
+            [request setValue:obj forHTTPHeaderField:key];
+        }];
+        [request setHTTPBody:paramsData];
+           session = [manager dataTaskWithRequest:request uploadProgress:nil downloadProgress:nil completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
+               if (!error) {
+                   [[self allTasks] removeObject:session];
+                   NSDictionary *params = [NSJSONSerialization JSONObjectWithData:paramsData options:kNilOptions error:nil];
+                   [self successResponse:responseObject manager:manager task:session url:url httpsHead:httpsHeader params:params httpMethod:httpMethod success:success fail:fail];
+               }
+               else {
+                   [[self allTasks] removeObject:session];
+                   NSDictionary *params = [NSJSONSerialization JSONObjectWithData:paramsData options:kNilOptions error:nil];
+                   [self handleCallbackWithError:error task:session url:url httpsHead:httpsHeader params:params httpMethod:httpMethod fail:fail];
+               }
+           }];
+           [session resume];
+    }
+    return session;
+}
+
 /// data 上传
 /// @param dataArray LEGOUploadData array
 /// @param params NSDictionary

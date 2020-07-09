@@ -189,6 +189,15 @@ typedef void (^LEGOUploadProgress)(int64_t bytesWritten, int64_t totalBytesWritt
                                success:(LEGOResponseSuccess)success
                                   fail:(LEGOResponseFailure)fail;
 
++ (LEGOURLSessionTask *)requestWithUrl:(NSString *)url
+                             httpMedth:(LEGOHttpMethodType)httpMethod
+                           httpsHeader:(NSDictionary *)httpsHeader
+                            paramsData:(NSData *)paramsData
+                           requestType:(LEGORequestType)requestType
+                          responseType:(LEGOResponseType)responseType
+                               success:(LEGOResponseSuccess)success
+                                  fail:(LEGOResponseFailure)fail;
+
 
 /// data 上传
 /// @param dataArray LEGOUploadData array
