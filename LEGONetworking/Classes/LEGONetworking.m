@@ -458,6 +458,69 @@ static NSDictionary *legoHttpHeaders = nil;
     return task;
 }
 
+/// data 下载
+/// @param path 存储路径
+/// @param params NSDictionary
+/// @param progress NSProgress
+/// @param responseType LEGOResponseType
+
++ (LEGOURLSessionTask *)downloadWithUrl:(NSString *)url
+                                   path:(NSURL *)path
+                            httpsHeader:(NSDictionary *)httpsHeader
+                                 params:(NSDictionary *)params
+                               progress:(void (^)(NSProgress *uploadProgress))progress
+                           responseType:(LEGOResponseType)responseType
+                                success:(LEGOResponseSuccess)success
+                                   fail:(LEGOResponseFailure)fail
+{
+    AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
+    switch (responseType) {
+           case kLEGOResponseTypeJSON: {
+               manager.responseSerializer = [AFJSONResponseSerializer serializer];
+               break;
+           }
+           case kLEGOResponseTypeXML: {
+               manager.responseSerializer = [AFXMLParserResponseSerializer serializer];
+               break;
+           }
+           case kLEGOResponseTypeData: {
+               manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+               break;
+           }
+           default: {
+               break;
+           }
+    }
+
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:url]];
+    [httpsHeader enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
+        [request setValue:obj forHTTPHeaderField:key];
+    }];
+    __block NSURLSessionDownloadTask *task = [manager downloadTaskWithRequest:request progress:progress destination:^NSURL * _Nonnull(NSURL * _Nonnull targetPath, NSURLResponse * _Nonnull response) {
+        return path;
+    } completionHandler:^(NSURLResponse * _Nonnull responseObject, NSURL * _Nullable filePath, NSError * _Nullable error) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if (!error) {
+                if (success) {
+                    success(nil);
+                }
+                [[self allTasks] removeObject:task];
+            }
+            else {
+                [[self allTasks] removeObject:task];
+                if (fail) {
+                    fail(nil);
+                }
+            }
+        });
+    }];
+    [task resume];
+    if (task) {
+        [[self allTasks] addObject:task];
+    }
+    return task;
+}
+
 + (NSString *)encodeUrl:(NSString *)url {
     return [self LEGO_URLEncode:url];
 }

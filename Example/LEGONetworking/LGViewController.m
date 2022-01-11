@@ -105,25 +105,25 @@
     //    [manager.requestSerializer setValue:[LEGOTokenManager sharedManager].token forHTTPHeaderField:@"token"];
     //    [manager.requestSerializer setValue:@"1" forHTTPHeaderField:@"platform"];
     //    [manager.requestSerializer setValue:[UIDevice currentDevice].identifierForVendor.UUIDString forHTTPHeaderField:@"device"];
-    NSDictionary *httpsHead = @{
-        @"platform":@"1",
-        @"device":[UIDevice currentDevice].identifierForVendor.UUIDString
-    };
-    [LEGONetworking configCommonHttpHeaders:httpsHead];
-    
-    [LEGOTokenManager saveToken:@""];
-    [LEGOTokenManager saveToken:@"" httpHeadKey:@"token"];
-    
-    // 设置超时时间
-    [LEGONetworking setTimeout:60];
-    
-    // 设置最大并发数
-    [LEGONetworking setMaxConnectOperationCount:3];
-    
-    // 取消某个请求
-    [LEGONetworking cancelRequestWithURL:@"http://api.map.baidu.com/telematics/v3/weather"];
-    // 取消全部请求
-    [LEGONetworking cancelAllRequest];
+//    NSDictionary *httpsHead = @{
+//        @"platform":@"1",
+//        @"device":[UIDevice currentDevice].identifierForVendor.UUIDString
+//    };
+//    [LEGONetworking configCommonHttpHeaders:httpsHead];
+//
+//    [LEGOTokenManager saveToken:@""];
+//    [LEGOTokenManager saveToken:@"" httpHeadKey:@"token"];
+//
+//    // 设置超时时间
+//    [LEGONetworking setTimeout:60];
+//
+//    // 设置最大并发数
+//    [LEGONetworking setMaxConnectOperationCount:3];
+//
+//    // 取消某个请求
+//    [LEGONetworking cancelRequestWithURL:@"http://api.map.baidu.com/telematics/v3/weather"];
+//    // 取消全部请求
+//    [LEGONetworking cancelAllRequest];
 
     //  NSLog(@"%@", task);
 	// Do any additional setup after loading the view, typically from a nib.

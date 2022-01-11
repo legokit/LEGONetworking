@@ -216,6 +216,20 @@ typedef void (^LEGOUploadProgress)(int64_t bytesWritten, int64_t totalBytesWritt
                               success:(LEGOResponseSuccess)success
                                  fail:(LEGOResponseFailure)fail;
 
+/// data 下载
+/// @param path 存储路径
+/// @param params NSDictionary
+/// @param progress NSProgress
+/// @param responseType LEGOResponseType
+
++ (LEGOURLSessionTask *)downloadWithUrl:(NSString *)url
+                                   path:(NSURL *)path
+                            httpsHeader:(NSDictionary *)httpsHeader
+                                 params:(NSDictionary *)params
+                               progress:(void (^)(NSProgress *uploadProgress))progress
+                           responseType:(LEGOResponseType)responseType
+                                success:(LEGOResponseSuccess)success
+                                   fail:(LEGOResponseFailure)fail;
 
 /**
  取消某个请求。如果是要取消某个请求，最好是引用接口所返回来的LEGOURLSessionTask对象，然后调用对象的cancel方法。如果不想引用对象，这里额外提供了一种方法来实现取消某个请求
