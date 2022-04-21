@@ -254,6 +254,7 @@ static NSDictionary *legoHttpHeaders = nil;
             [dic setObject:obj forKey:key];
         }
     }];
+    httpsHeader = dic;
     
     [httpsHeader enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
         [manager.requestSerializer setValue:obj forHTTPHeaderField:key];
@@ -343,9 +344,14 @@ static NSDictionary *legoHttpHeaders = nil;
            }
     }
     
-    if (!httpsHeader || ![httpsHeader isKindOfClass:[NSDictionary class]]) {
-        httpsHeader = [self.class getDefaultHttpsHeader];
-    }
+    __block NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithDictionary:httpsHeader];
+    [[self.class getDefaultHttpsHeader] enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
+        if (![dic.allValues containsObject:key]) {
+            [dic setObject:obj forKey:key];
+        }
+    }];
+    httpsHeader = dic;
+    
     __block NSURLSessionDataTask *session = nil;
     dispatch_async(dispatch_get_main_queue(), ^{
         [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
@@ -439,6 +445,15 @@ static NSDictionary *legoHttpHeaders = nil;
             }];
         }
     } error:nil];
+    
+    __block NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithDictionary:httpsHeader];
+    [[self.class getDefaultHttpsHeader] enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
+        if (![dic.allValues containsObject:key]) {
+            [dic setObject:obj forKey:key];
+        }
+    }];
+    httpsHeader = dic;
+    
     [httpsHeader enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
         [request setValue:obj forHTTPHeaderField:key];
     }];
@@ -497,6 +512,15 @@ static NSDictionary *legoHttpHeaders = nil;
     }
 
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:url]];
+    
+    __block NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithDictionary:httpsHeader];
+    [[self.class getDefaultHttpsHeader] enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
+        if (![dic.allValues containsObject:key]) {
+            [dic setObject:obj forKey:key];
+        }
+    }];
+    httpsHeader = dic;
+    
     [httpsHeader enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
         [request setValue:obj forHTTPHeaderField:key];
     }];
