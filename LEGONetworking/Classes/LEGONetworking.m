@@ -248,9 +248,13 @@ static NSDictionary *legoHttpHeaders = nil;
            }
     }
     
-    if (!httpsHeader || ![httpsHeader isKindOfClass:[NSDictionary class]]) {
-        httpsHeader = [self.class getDefaultHttpsHeader];
-    }
+    __block NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithDictionary:httpsHeader];
+    [[self.class getDefaultHttpsHeader] enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
+        if (![dic.allValues containsObject:key]) {
+            [dic setObject:obj forKey:key];
+        }
+    }];
+    
     [httpsHeader enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
         [manager.requestSerializer setValue:obj forHTTPHeaderField:key];
     }];
